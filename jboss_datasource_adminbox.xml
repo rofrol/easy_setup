@@ -1,0 +1,14 @@
+                <datasource jndi-name="java:jboss/jdbc/mlp-pa-ab-database" pool-name="adminboxPATestDS" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:oracle:thin:@localhost:1521:XE</connection-url>
+                    <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+                    <driver>oracle-jdbc4</driver>
+                    <pool>
+                        <min-pool-size>1</min-pool-size>
+                        <max-pool-size>5</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>paab</user-name>
+                        <password>paab</password>
+                    </security>
+                </datasource>
