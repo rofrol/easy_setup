@@ -39,7 +39,8 @@ var standaloneBasePath = path.resolve(process.env.JBOSS_VERSION, 'standalone/con
 var standaloneBase = fs.readFileSync(standaloneBasePath, 'utf8');
 var standaloneOut = standaloneBase
     .replace(/            <bindings><\/bindings>/g, bindings.join('\n'))
-    .replace(/                <datasource><\/datasource>/g, datasources.join('\n'));
+    .replace(/                <datasource><\/datasource>/g, datasources.join('\n'))
+    .replace(new RegExp('"/projects/xbg-pa/config/localConfigExample"', 'g'), '"' + path.dirname(process.env.PA_CONFIG) + '"');
 
 var JBOSS_HOME = path.resolve(process.env.JBOSS_HOME);
 var standaloneOutPath = path.resolve(JBOSS_HOME, 'standalone/configuration/standalone.xml');
