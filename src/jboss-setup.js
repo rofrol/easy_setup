@@ -17,26 +17,25 @@ fs.removeSync(path.resolve(process.env.JBOSS_HOME, 'standalone/deployments/*.war
 // standalone.xml
 //************************************************************************
 
-var bindings = ['            <bindings>', fs.readFileSync('jboss_bindings_shared.xml', 'utf8')];
+var bindings = ['            <bindings>', fs.readFileSync('jboss/bindings_shared.xml', 'utf8')];
 var datasources = [];
 
 if(process.env.PA_ENABLED === 'true' || process.env.ADMINBOX_ENABLED === 'true') {
-    bindings.push(fs.readFileSync('jboss_bindings_pa_adminbox.xml', 'utf8'));
+    bindings.push(fs.readFileSync('jboss/bindings_pa_adminbox.xml', 'utf8'));
 }
 if(process.env.PA_ENABLED === 'true') {
-    datasources.push(fs.readFileSync('jboss_datasource_pa.xml', 'utf8'));
+    datasources.push(fs.readFileSync('jboss/datasource_pa.xml', 'utf8'));
 }
 if(process.env.ADMINBOX_ENABLED === 'true') {
-    datasources.push(fs.readFileSync('jboss_datasource_adminbox.xml', 'utf8'));
+    datasources.push(fs.readFileSync('jboss/datasource_adminbox.xml', 'utf8'));
 }
 if(process.env.RTT_ENABLED === 'true') {
-    bindings.push(fs.readFileSync('jboss_bindings_rtt.xml', 'utf8'));
-    datasources.push(fs.readFileSync('jboss_datasource_rtt.xml', 'utf8'));
+    bindings.push(fs.readFileSync('jboss/bindings_rtt.xml', 'utf8'));
+    datasources.push(fs.readFileSync('jboss/datasource_rtt.xml', 'utf8'));
 }
 bindings.push('            </bindings>');
 
-var standaloneBasePath = path.resolve(process.env.JBOSS_VERSION, 'standalone/configuration/standalone.xml');
-var standaloneBase = fs.readFileSync(standaloneBasePath, 'utf8');
+var standaloneBase = fs.readFileSync('jboss/standalone-' + process.env.JBOSS_VERSION + '.xml', 'utf8');
 var standaloneOut = standaloneBase
     .replace(/            <bindings><\/bindings>/g, bindings.join('\n'))
     .replace(/                <datasource><\/datasource>/g, datasources.join('\n'))
