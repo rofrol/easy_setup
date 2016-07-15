@@ -16,10 +16,10 @@ try {
   } else {
     exec('mvn clean install -T 4 -U -DskipTests -P development');
   }
-
-  fs.removeSync(process.env.JBOSS_HOME + '/standalone/deployments/*.war*');
-  fs.copySync(PROJECT_WAR, process.env.JBOSS_HOME + '/standalone/deployments/' + path.basename(PROJECT_WAR));
 }
 catch (err) {
   console.log('chdir: ' + err);
 }
+
+fs.removeSync(process.env.JBOSS_HOME + '/standalone/deployments/*.war*');
+fs.copySync(PROJECT_WAR, process.env.JBOSS_HOME + '/standalone/deployments/' + path.basename(PROJECT_WAR));
