@@ -11,7 +11,7 @@ exec('echo exit', {silent:true}).exec(db);
 // flyway
 
 var path = require('path');
-console.log('Starting directory: ' + process.cwd());
+
 try {
   process.chdir(path.resolve(process.env.PROJECT_HOME, 'pa-storage'));
   exec('mvn compile flyway:migrate -e -Dflyway.locations=filesystem:src/main/resources/db/migration/pa -Dflyway.placeholders.paUser=PA -Dflyway.placeholders.paWorkUser=PAWORK -Dflyway.url=jdbc:oracle:thin:@localhost:1521:XE -Dflyway.table=schema_version -Dflyway.outOfOrder=false -Dflyway.user=PA -Dflyway.password=pa');
