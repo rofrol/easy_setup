@@ -5,8 +5,8 @@ require('shelljs/global');
 
 var db = require('./db.js');
 
-exec('echo exit', {silent:true}).exec(db.DB + ' @oracle/create-tablespaces.sql');
-exec('echo exit', {silent:true}).exec(db.DB + ' @oracle/pa-users.sql');
+exec('echo exit', {silent:true}).exec(db.SQLPLUS_AS_SYSTEM + ' @oracle/create-tablespaces.sql');
+exec('echo exit', {silent:true}).exec(db.SQLPLUS_AS_SYSTEM + ' @oracle/pa-users.sql');
 
 // flyway
 
