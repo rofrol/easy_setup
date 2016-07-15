@@ -3,10 +3,10 @@ require('shelljs/global');
 
 // sql
 
-var db = 'sqlplus -s system/' + process.env.ORACLE_SYSTEM_PASSWORD + '@localhost:1521/xe';
-exec('echo drop user pa cascade;').exec(db);
-exec('echo drop user pawork cascade;').exec(db);
-exec('echo exit', {silent:true}).exec(db + ' @pa-users.sql');
+var db = require('./db.js');
+
+exec('echo exit', {silent:true}).exec(db.DB + ' @oracle/create-tablespaces.sql');
+exec('echo exit', {silent:true}).exec(db.DB + ' @oracle/pa-users.sql');
 
 // flyway
 
@@ -31,7 +31,7 @@ catch (err) {
 // Title: [PA] Permissions update
 // From: Ostrowka Pawel
 // Date: 2016-04-01 18:17
-exec("echo INSERT INTO PA_ROLE_RIGHT_STATIC (PA_ROLE, PA_RIGHT, CREATED_DATE, VERSION, AGENT, INHERITABLE) VALUES ('ZSC_AWT_BERATER_DE', 'PA', sysdate, sysdate, 'Adminbox', 'N');")
-.exec('sqlplus -s pa/pa@localhost:1521/xe');
+exec("echo INSERT INTO PA_ROLE_RIGHT_STATIC (PA_ROLE, PA_RIGHT, CREATED_DATE, VERSION, AGENT, INHERITABLE) VALUES ('ZSC_AWT_BERATER_DE', 'PA', sysdate, sysdate, 'Adminbox', 'N');", {silent:true})
+.exec('sqlplus -s pa/pa@' + db.ORACLE_HOSTNAME);
 
 // http://stackoverflow.com/questions/19803748/change-working-directory-in-my-current-shell-context-when-running-node-script

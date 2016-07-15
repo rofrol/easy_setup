@@ -35,11 +35,15 @@ if(process.env.RTT_ENABLED === 'true') {
 }
 bindings.push('            </bindings>');
 
+
+var db = require('./db.js');
+
 var standaloneBase = fs.readFileSync('jboss/standalone-' + process.env.JBOSS_VERSION + '.xml', 'utf8');
 var standaloneOut = standaloneBase
     .replace(/            <bindings><\/bindings>/g, bindings.join('\n'))
     .replace(/                <datasource><\/datasource>/g, datasources.join('\n'))
-    .replace(new RegExp('"/projects/xbg-pa/config/localConfigExample"', 'g'), '"' + path.dirname(process.env.PA_CONFIG) + '"');
+    .replace(new RegExp('"/projects/xbg-pa/config/localConfigExample"', 'g'), '"' + path.dirname(process.env.PA_CONFIG) + '"')
+    .replace(/localhost:1521:XE/, db.ORACLE_HOSTNAME);
 
 var JBOSS_HOME = path.resolve(process.env.JBOSS_HOME);
 var standaloneOutPath = path.resolve(JBOSS_HOME, 'standalone/configuration/standalone.xml');

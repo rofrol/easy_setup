@@ -1,8 +1,33 @@
--- drop user paab cascade;
--- drop user paabwork cascade;
+-- http://stackoverflow.com/questions/30710990/creating-an-oracle-user-if-it-doesnt-already-exist
+-- http://blog.lakmali.com/2011/10/oracle-plsql-script-to-drop-user-if-not.html
+
+-- Try to lose the ";" from inside the string that you Execute Immediate
+-- http://stackoverflow.com/questions/885304/why-does-running-this-query-with-execute-immediate-cause-it-to-fail
+
+declare
+userexist integer;
+username = 'paab'
+begin
+  select count(*) into userexist from dba_users where username=username;
+  if (userexist = 0) then
+    execute immediate 'DROP USER '||username||' CASCADE';
+  end if;
+end;
+/
+
+declare
+userexist integer;
+username = 'paabwork'
+begin
+  select count(*) into userexist from dba_users where username=username;
+  if (userexist = 0) then
+    execute immediate 'DROP USER '||username||' CASCADE';
+  end if;
+end;
+/
 
 -- USER SQL
-CREATE USER paabwork IDENTIFIED BY paabwork 
+CREATE USER paabwork IDENTIFIED BY paabwork
 DEFAULT TABLESPACE "BAP_DATA"
 TEMPORARY TABLESPACE "TEMP";
 
@@ -253,7 +278,7 @@ GRANT DROP TABLESPACE TO paabwork ;
 GRANT ALTER ROLLBACK SEGMENT TO paabwork ;
 
 -- USER SQL
-CREATE USER paab IDENTIFIED BY paab 
+CREATE USER paab IDENTIFIED BY paab
 DEFAULT TABLESPACE "BAP_DATA"
 TEMPORARY TABLESPACE "TEMP";
 
@@ -502,4 +527,3 @@ GRANT CREATE CUBE TO paab ;
 GRANT ALTER RESOURCE COST TO paab ;
 GRANT DROP TABLESPACE TO paab ;
 GRANT ALTER ROLLBACK SEGMENT TO paab ;
-

@@ -1,8 +1,33 @@
-CREATE TABLESPACE BAP_INDX DATAFILE 'BAP_INDX.dbf' SIZE 40M ONLINE;
-CREATE TABLESPACE BAP_DATA DATAFILE 'BAP_DATA.dbf' SIZE 40M ONLINE;
+-- http://stackoverflow.com/questions/30710990/creating-an-oracle-user-if-it-doesnt-already-exist
+-- http://blog.lakmali.com/2011/10/oracle-plsql-script-to-drop-user-if-not.html
+
+-- Try to lose the ";" from inside the string that you Execute Immediate
+-- http://stackoverflow.com/questions/885304/why-does-running-this-query-with-execute-immediate-cause-it-to-fail
+
+declare
+userexist integer;
+username = 'pa'
+begin
+  select count(*) into userexist from dba_users where username=username;
+  if (userexist = 0) then
+    execute immediate 'DROP USER '||username||' CASCADE';
+  end if;
+end;
+/
+
+declare
+userexist integer;
+username = 'pawork'
+begin
+  select count(*) into userexist from dba_users where username=username;
+  if (userexist = 0) then
+    execute immediate 'DROP USER '||username||' CASCADE';
+  end if;
+end;
+/
 
 -- USER SQL
-CREATE USER pawork IDENTIFIED BY pawork 
+CREATE USER pawork IDENTIFIED BY pawork
 DEFAULT TABLESPACE "BAP_DATA"
 TEMPORARY TABLESPACE "TEMP";
 
@@ -255,7 +280,7 @@ GRANT DROP TABLESPACE TO pawork ;
 GRANT ALTER ROLLBACK SEGMENT TO pawork ;
 
 -- USER SQL
-CREATE USER pa IDENTIFIED BY pa 
+CREATE USER pa IDENTIFIED BY pa
 DEFAULT TABLESPACE "BAP_DATA"
 TEMPORARY TABLESPACE "TEMP";
 
@@ -506,4 +531,3 @@ GRANT CREATE CUBE TO pa ;
 GRANT ALTER RESOURCE COST TO pa ;
 GRANT DROP TABLESPACE TO pa ;
 GRANT ALTER ROLLBACK SEGMENT TO pa ;
-
