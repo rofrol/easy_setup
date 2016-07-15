@@ -6,13 +6,17 @@ var path = require('path');
 var PROJECT_HOME = process.env[process.env.MAIN + '_HOME'];
 var PROJECT_WAR = PROJECT_HOME + '/' + process.env[process.env.MAIN + '_WAR'];
 
-function offline() {
+function ifOffline() {
+  return process.env.OFFLINE === 'true'? '-o': '';
+}
+
+function ifUpdate() {
   return process.env.OFFLINE === 'true'? '': '-U';
 }
 
 try {
   process.chdir(PROJECT_HOME);
-  exec('mvn clean install -T 4 ' + offline() + ' -DskipTests -P development');
+  exec('mvn clean ' + ifOffline() + ' install -T 4 ' + ifUpdate() + ' -DskipTests -P development');
 }
 catch (err) {
   console.log('chdir: ' + err);
