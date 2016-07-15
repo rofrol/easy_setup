@@ -36,4 +36,6 @@ git es
 
 ## Browser
 
-Open http://localhost:8080/pa-web/frontend/index.jsp?partnerno=6720556 and login as BER07848.
+### PA
+
+When you see in console 'JBoss ... started in', open http://localhost:8080/pa-web/frontend/index.jsp?partnerno=6720556 and login as BER07848.
