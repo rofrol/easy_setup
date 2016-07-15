@@ -16,6 +16,10 @@ function ifUpdate() {
 
 try {
   process.chdir(PROJECT_HOME);
+
+  //maybe not needed anymore
+  exec('git checkout 5f24678 -- pa-web/src/main/java/de/mlp/xbg/pa/adapter/CrmAdapter.java');
+  
   exec('mvn clean ' + ifOffline() + ' install -T 4 ' + ifUpdate() + ' -DskipTests -P development');
 }
 catch (err) {
