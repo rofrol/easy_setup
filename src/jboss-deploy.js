@@ -6,11 +6,11 @@ var path = require('path');
 var PROJECT_HOME = process.env[process.env.MAIN + '_HOME'];
 var PROJECT_WAR = PROJECT_HOME + '/' + process.env[process.env.MAIN + '_WAR'];
 
-function ifOffline() {
+function mvnOffline() {
   return process.env.OFFLINE === 'true'? '-o': '';
 }
 
-function ifUpdate() {
+function mvnUpdate() {
   return process.env.OFFLINE === 'true'? '': '-U';
 }
 
@@ -19,8 +19,8 @@ try {
 
   //maybe not needed anymore
   exec('git checkout 5f24678 -- pa-web/src/main/java/de/mlp/xbg/pa/adapter/CrmAdapter.java');
-  
-  exec('mvn clean ' + ifOffline() + ' install -T 4 ' + ifUpdate() + ' -DskipTests -P development');
+
+  exec('mvn clean ' + mvnOffline() + ' install -T 4 ' + mvnUpdate() + ' -DskipTests -P development');
 }
 catch (err) {
   console.log('chdir: ' + err);
