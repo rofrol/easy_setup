@@ -4,7 +4,7 @@ var path = require('path');
 
 try {
   process.chdir(process.env.JBOSS_HOME + '/bin');
-  console.log(path.resolve(process.env.JBOSS_HOME));
+
   process.env.JAVA_OPTS = "-XX:PermSize=512m -XX:MaxPermSize=512m";
 
   var isWin = /^win/.test(process.platform);
