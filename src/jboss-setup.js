@@ -36,16 +36,13 @@ if(process.env.RTT_ENABLED === 'true') {
 bindings.push('            </bindings>');
 
 var standaloneBasePath = path.resolve(process.env.JBOSS_VERSION, 'standalone/configuration/standalone.xml');
-console.log('standaloneBasePath=' + standaloneBasePath);
 var standaloneBase = fs.readFileSync(standaloneBasePath, 'utf8');
 var standaloneOut = standaloneBase
     .replace(/            <bindings><\/bindings>/g, bindings.join('\n'))
     .replace(/                <datasource><\/datasource>/g, datasources.join('\n'));
 
 var JBOSS_HOME = path.resolve(process.env.JBOSS_HOME);
-console.log('JBOSS_HOME=' + JBOSS_HOME);
 var standaloneOutPath = path.resolve(JBOSS_HOME, 'standalone/configuration/standalone.xml');
-console.log('standaloneOutPath=' + standaloneOutPath);
 fs.writeFile(standaloneOutPath, standaloneOut, 'utf8', function (err) {
     if (err) return console.log(err);
 });
@@ -55,7 +52,6 @@ fs.writeFile(standaloneOutPath, standaloneOut, 'utf8', function (err) {
 //************************************************************************
 
 var paConfigBasePath = path.resolve(process.env.PA_CONFIG_BASE);
-console.log('paConfigBasePath=' + paConfigBasePath);
 var paConfigOut = fs.readFileSync(paConfigBasePath, 'utf8');
 
 paConfigOut = replace(paConfigOut, 'rtt.enabled');

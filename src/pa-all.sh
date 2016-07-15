@@ -6,6 +6,6 @@ cd "$DIR"
 
 node pa-oracle-setup.js
 node pa-npm-setup.js
-node jboss-setup.sh
+node jboss-setup.js
 node jboss-deploy.js
-node jboss-start.sh
+node jboss-start.js
