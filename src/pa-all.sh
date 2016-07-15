@@ -8,4 +8,4 @@ node pa-oracle-setup.js
 node pa-npm-setup.js
 node jboss-setup.sh
 node jboss-deploy.js
-sh jboss-start.sh
+node jboss-start.sh

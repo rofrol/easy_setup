@@ -1,7 +1,6 @@
 require('dotenv').config({path: '../.env'});
 require('shelljs/global');
 var fs = require('fs-extra');
-
 var path = require('path');
 
 var PROJECT_HOME = process.env[process.env.MAIN + '_HOME'];
