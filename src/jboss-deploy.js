@@ -9,7 +9,6 @@ var PROJECT_WAR = PROJECT_HOME + '/' + process.env[process.env.MAIN + '_WAR'];
 
 try {
 
-  fs.removeSync(PROJECT_WAR);
   process.chdir(PROJECT_HOME);
 
   if(process.env.OFFLINE === 'true') {
