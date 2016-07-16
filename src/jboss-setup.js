@@ -33,42 +33,35 @@ if(process.env.RTT_ENABLED === 'true') {
     bindings.push(fs.readFileSync('jboss/bindings_rtt.xml', 'utf8'));
     datasources.push(fs.readFileSync('jboss/datasource_rtt.xml', 'utf8'));
 }
+
 bindings.push('            </bindings>');
 
 
 var db = require('./db.js');
+var standalone = fs.readFileSync('jboss/standalone-' + process.env.JBOSS_VERSION + '.xml', 'utf8');
 
-var standaloneBase = fs.readFileSync('jboss/standalone-' + process.env.JBOSS_VERSION + '.xml', 'utf8');
-var standaloneOut = standaloneBase
+standalone = standalone
     .replace(/            <bindings><\/bindings>/g, bindings.join('\n'))
     .replace(/                <datasource><\/datasource>/g, datasources.join('\n'))
     .replace(new RegExp('"/projects/xbg-pa/config/localConfigExample"', 'g'), '"' + path.dirname(process.env.PA_CONFIG) + '"')
     .replace(/localhost:1521:XE/, db.ORACLE_HOSTNAME);
 
-var JBOSS_HOME = path.resolve(process.env.JBOSS_HOME);
-var standaloneOutPath = path.resolve(JBOSS_HOME, 'standalone/configuration/standalone.xml');
-fs.writeFile(standaloneOutPath, standaloneOut, 'utf8', function (err) {
-    if (err) return console.log(err);
-});
+fs.outputFileSync(process.env.JBOSS_HOME + '/standalone/configuration/standalone.xml', standalone, 'utf8');
 
 //************************************************************************
 // conf
 //************************************************************************
 
-var paConfigBasePath = path.resolve(process.env.PA_CONFIG_BASE);
-var paConfigOut = fs.readFileSync(paConfigBasePath, 'utf8');
+var paConfig = fs.readFileSync(process.env.PA_CONFIG_BASE, 'utf8');
 
-paConfigOut = replace(paConfigOut, 'rtt.enabled');
-paConfigOut = replace(paConfigOut, 'contentDirectory.current');
-paConfigOut = replace(paConfigOut, 'contentDirectory.upload');
-paConfigOut = replace(paConfigOut, 'mappingRegelnDirectory.upload');
-paConfigOut = replace(paConfigOut, 'adminboxUploadDirectory');
-paConfigOut = replace(paConfigOut, 'bundler.documentPoolDirectoryPath');
+paConfig = replace(paConfig, 'rtt.enabled');
+paConfig = replace(paConfig, 'contentDirectory.current');
+paConfig = replace(paConfig, 'contentDirectory.upload');
+paConfig = replace(paConfig, 'mappingRegelnDirectory.upload');
+paConfig = replace(paConfig, 'adminboxUploadDirectory');
+paConfig = replace(paConfig, 'bundler.documentPoolDirectoryPath');
 
-var paConfigOutPath = path.resolve(process.env.PA_CONFIG);
-fs.writeFile(paConfigOutPath, paConfigOut, 'utf8', function (err) {
-    if (err) return console.log(err);
-});
+fs.outputFileSync(process.env.PA_CONFIG, paConfig, 'utf8');
 
 //************************************************************************
 // Helper functions
