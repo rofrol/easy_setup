@@ -1,14 +1,15 @@
-# Easy setup
+# MLP easy setup
 
 ## Requirements
 
+- node.js
 - bash
 - `mvn` is in `$PATH`
-- `$MVN_HOME` and `$JAVA_HOME` are set
+- env `MVN_HOME` and `JAVA_HOME` are set
 
 ## Oracle on Windows
 
-Exapmple configs are in `src/oracle`. You have to put them i.e. in `/oraclexe/app/oracle/product/11.2.0/server/network/ADMIN` and restart listener.
+Example configs are in `src/oracle`. You have to put them i.e. in `/oraclexe/app/oracle/product/11.2.0/server/network/ADMIN` and restart listener.
 
 To do that you have to run `cmd.exe` as Administrator and run commands:
 
