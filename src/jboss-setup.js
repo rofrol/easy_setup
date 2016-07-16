@@ -54,12 +54,12 @@ fs.outputFileSync(process.env.JBOSS_HOME + '/standalone/configuration/standalone
 
 var paConfig = fs.readFileSync(process.env.PA_CONFIG_BASE, 'utf8');
 
-paConfig = replace(paConfig, 'rtt.enabled');
-paConfig = replace(paConfig, 'contentDirectory.current');
-paConfig = replace(paConfig, 'contentDirectory.upload');
-paConfig = replace(paConfig, 'mappingRegelnDirectory.upload');
-paConfig = replace(paConfig, 'adminboxUploadDirectory');
-paConfig = replace(paConfig, 'bundler.documentPoolDirectoryPath');
+paConfig = updateValueFromEnv(paConfig, 'rtt.enabled');
+paConfig = updateValueFromEnv(paConfig, 'contentDirectory.current');
+paConfig = updateValueFromEnv(paConfig, 'contentDirectory.upload');
+paConfig = updateValueFromEnv(paConfig, 'mappingRegelnDirectory.upload');
+paConfig = updateValueFromEnv(paConfig, 'adminboxUploadDirectory');
+paConfig = updateValueFromEnv(paConfig, 'bundler.documentPoolDirectoryPath');
 
 fs.outputFileSync(process.env.PA_CONFIG, paConfig, 'utf8');
 
@@ -67,7 +67,7 @@ fs.outputFileSync(process.env.PA_CONFIG, paConfig, 'utf8');
 // Helper functions
 //************************************************************************
 
-function replace(string, key) {
+function updateValueFromEnv(string, key) {
     return replaceValue(string, key, valueFromEnv(key));
 }
 
