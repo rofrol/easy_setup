@@ -6,22 +6,20 @@
 
 declare
 userexist integer;
-username = 'pa'
 begin
-  select count(*) into userexist from dba_users where username=username;
+  select count(*) into userexist from dba_users where username='pa';
   if (userexist = 0) then
-    execute immediate 'DROP USER '||username||' CASCADE';
+    execute immediate 'DROP USER pa CASCADE';
   end if;
 end;
 /
 
 declare
 userexist integer;
-username = 'pawork'
 begin
-  select count(*) into userexist from dba_users where username=username;
+  select count(*) into userexist from dba_users where username='pawork';
   if (userexist = 0) then
-    execute immediate 'DROP USER '||username||' CASCADE';
+    execute immediate 'DROP USER pawork CASCADE';
   end if;
 end;
 /
