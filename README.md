@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- node.js
+- node.js-4.x
 - bash
 - `mvn` is in `$PATH`
 - env `MVN_HOME` and `JAVA_HOME` are set
@@ -24,7 +24,9 @@ lsnrctl start
 
 Then customize `.env` to your needs.
 
-## Run PA
+## PA
+
+### Run
 
 ```
 cd src
@@ -33,8 +35,30 @@ sh pa-all.sh
 
 Later you run specific scripts listed in `pa-all.sh`.
 
-## Browser
+### Browser
 
-### PA
+When you see in console 'JBoss ... started', open http://localhost:8080/pa-web/frontend/index.jsp?partnerno=6720556 and login as BER07848.
 
-When you see in console 'JBoss ... started in', open http://localhost:8080/pa-web/frontend/index.jsp?partnerno=6720556 and login as BER07848.
+## RTT
+
+### Run
+
+```
+cd src
+sh rtt-all.sh
+```
+
+Later you run specific scripts listed in `rtt-all.sh`.
+
+Now stop this script. Then:
+
+```
+cd xbg-rtt-web
+grunt
+```
+
+Run jboss from Intellij IDEA.
+
+### Browser
+
+When you see in console 'JBoss ... started ', open http://localhost:8080/xb-web/frontend/index.jsp?partnerno=6720556 and login as BER07848.

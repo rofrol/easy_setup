@@ -48,20 +48,32 @@ standalone = standalone
 
 fs.outputFileSync(process.env.JBOSS_HOME + '/standalone/configuration/standalone.xml', standalone, 'utf8');
 
+var config
+
 //************************************************************************
-// conf
+// PA config
 //************************************************************************
 
-var paConfig = fs.readFileSync(process.env.PA_CONFIG_BASE, 'utf8');
+config = fs.readFileSync(process.env.PA_CONFIG_BASE, 'utf8');
 
-paConfig = updateValueFromEnv(paConfig, 'rtt.enabled');
-paConfig = updateValueFromEnv(paConfig, 'contentDirectory.current');
-paConfig = updateValueFromEnv(paConfig, 'contentDirectory.upload');
-paConfig = updateValueFromEnv(paConfig, 'mappingRegelnDirectory.upload');
-paConfig = updateValueFromEnv(paConfig, 'adminboxUploadDirectory');
-paConfig = updateValueFromEnv(paConfig, 'bundler.documentPoolDirectoryPath');
+config = updateValueFromEnv(config, 'rtt.enabled');
+config = updateValueFromEnv(config, 'contentDirectory.current');
+config = updateValueFromEnv(config, 'contentDirectory.upload');
+config = updateValueFromEnv(config, 'mappingRegelnDirectory.upload');
+config = updateValueFromEnv(config, 'adminboxUploadDirectory');
+config = updateValueFromEnv(config, 'bundler.documentPoolDirectoryPath');
 
-fs.outputFileSync(process.env.PA_CONFIG, paConfig, 'utf8');
+fs.outputFileSync(process.env.PA_CONFIG, config, 'utf8');
+
+//************************************************************************
+// RTT config
+//************************************************************************
+
+config = fs.readFileSync(process.env.RTT_CONFIG_BASE, 'utf8');
+
+config = updateValueFromEnv(config, 'disable-auth-filter');
+
+fs.outputFileSync(process.env.RTT_CONFIG, config, 'utf8');
 
 //************************************************************************
 // Helper functions
