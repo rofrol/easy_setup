@@ -44,6 +44,7 @@ standalone = standalone
     .replace(/            <bindings><\/bindings>/g, bindings.join('\n'))
     .replace(/                <datasource><\/datasource>/g, datasources.join('\n'))
     .replace(new RegExp('"/projects/xbg-pa/config/localConfigExample"', 'g'), '"' + path.dirname(process.env.PA_CONFIG) + '"')
+    .replace(new RegExp('"/projects/xbg-rtt/config/local"', 'g'), '"' + path.dirname(process.env.PA_CONFIG) + '"')
     .replace(/localhost:1521:XE/, db.ORACLE_HOSTNAME);
 
 fs.outputFileSync(process.env.JBOSS_HOME + '/standalone/configuration/standalone.xml', standalone, 'utf8');
