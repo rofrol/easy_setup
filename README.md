@@ -18,16 +18,20 @@ lsnrctl stop
 lsnrctl start
 ```
 
+## Prepare config
+
+`cp .env.example .env`
+
+Then customize `.env` to your needs.
+
 ## Run PA
 
 ```
-cp .env.example .env
-# customize .env
+cd src
 sh pa-all.sh
 ```
 
 Later you run specific scripts listed in `pa-all.sh`.
-
 
 ## Browser
 
