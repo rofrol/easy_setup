@@ -26,6 +26,8 @@ Then customize `.env` to your needs.
 
 ## PA
 
+Change in `.env` MAIN to PA.
+
 ### Run
 
 ```
@@ -40,6 +42,8 @@ Later you run specific scripts listed in `pa-all.sh`.
 When you see in console 'JBoss ... started', open http://localhost:8080/pa-web/frontend/index.jsp?partnerno=6720556 and login as BER07848.
 
 ## RTT
+
+Change in `.env` MAIN to RTT.
 
 ### Run
 
@@ -61,4 +65,8 @@ Run jboss from Intellij IDEA.
 
 ### Browser
 
-When you see in console 'JBoss ... started ', open http://localhost:8080/xb-web/frontend/index.jsp?partnerno=6720556 and login as BER07848.
+When you see in console 'JBoss ... started ', open http://localhost:8080/xbg-rtt-web/.
+
+You have to login with some BER or SON, i.e. BER07848.
+
+But first you have to add privileges for logging to RTT.
