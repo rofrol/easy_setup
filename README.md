@@ -72,3 +72,11 @@ When you see in console 'JBoss ... started ', open http://localhost:8080/xbg-rtt
 You have to login with some BER or SON, i.e. BER07848.
 
 But first you have to add privileges for logging to RTT.
+
+## Troubleshootinhg
+
+You may need jdk-1.7.* for older JBoss-6.2.*
+
+`org.apache.jasper.JasperException: JBWEB004062: Unable to compile class for JSP`
+
+http://stackoverflow.com/questions/5919946/unable-to-compile-class-for-jsp
