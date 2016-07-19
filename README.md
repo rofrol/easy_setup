@@ -56,14 +56,14 @@ sh rtt-all.sh
 
 Later you run specific scripts listed in `rtt-all.sh`.
 
-Now stop this script. Then:
+Now stop this script. Then run jboss from Intellij IDEA. After that run:
 
 ```
 cd xbg-rtt-web
 grunt
 ```
 
-Run jboss from Intellij IDEA.
+For IDEA to update jboss resources, you have to switch from IDEA to another program and back.
 
 ### Browser
 
@@ -81,7 +81,7 @@ You may need jdk-1.7.* for older JBoss-6.2.*
 
 `org.apache.jasper.JasperException: JBWEB004062: Unable to compile class for JSP`
 
-http://stackoverflow.com/questions/5919946/unable-to-compile-class-for-jsp
+http://stackoverflow
 
 #### Change jdk
 
