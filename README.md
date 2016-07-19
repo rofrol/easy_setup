@@ -35,6 +35,7 @@ Change in `.env` MAIN to PA and `PA_ENABLED` to `true`.
 ```
 cd src
 sh pa-all.sh
+node pa-npm-setup.js
 ```
 
 Later you run specific scripts listed in `pa-all.sh`.
@@ -54,6 +55,7 @@ Change in `.env` MAIN to RTT `RTT_ENABLED` to `true`.
 ```
 cd src
 sh rtt-all.sh
+node rtt-npm-setup.js
 ```
 
 Later you run specific scripts listed in `rtt-all.sh`.

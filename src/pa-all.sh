@@ -10,7 +10,6 @@ if [ ! -d "$DIR/../node_modules" ]; then
 fi
 
 node pa-oracle-setup.js && \
-node pa-npm-setup.js && \
 node jboss-setup.js && \
 node jboss-deploy.js && \
 node jboss-start.js
