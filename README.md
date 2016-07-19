@@ -39,6 +39,8 @@ sh pa-all.sh
 
 Later you run specific scripts listed in `pa-all.sh`.
 
+If you run JBoss from IDEA and want to have updated frontend resources, you need to remove exclude for directory `pa-web/target/fronted`.
+
 ### Browser
 
 When you see in console 'JBoss ... started', open http://localhost:8080/pa-web/frontend/index.jsp?partnerno=6720556 and login as BER07848.
