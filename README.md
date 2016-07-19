@@ -43,7 +43,7 @@ If you run JBoss from IDEA and want to have updated frontend resources, you need
 
 ### Browser
 
-When you see in console 'JBoss ... started', open http://localhost:8080/pa-web/frontend/index.jsp?partnerno=6720556 and login as BER07848.
+When you see in console `JBoss ... started in`, open http://localhost:8080/pa-web/frontend/index.jsp?partnerno=6720556 and login as BER07848. If you see `JBoss ... started (with errors) in`, that's not good.
 
 ## RTT
 
@@ -69,7 +69,7 @@ For IDEA to update jboss resources, you have to switch from IDEA to another prog
 
 ### Browser
 
-When you see in console 'JBoss ... started ', open http://localhost:8080/xbg-rtt-web/.
+When you see in console `JBoss ... started in`, open http://localhost:8080/xbg-rtt-web/. If you see `JBoss ... started (with errors) in`, that's not good.
 
 You have to login with some BER or SON, i.e. BER07848.
 
