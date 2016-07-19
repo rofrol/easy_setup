@@ -24,6 +24,8 @@ lsnrctl start
 
 Then customize `.env` to your needs.
 
+You need to set `MAIN` and `*_ENABLED`.
+
 ## PA
 
 Change in `.env` MAIN to PA.
