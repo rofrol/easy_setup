@@ -9,7 +9,7 @@
 
 ## Oracle on Windows
 
-Example configs are in `src/oracle`. You have to put them i.e. in `/oraclexe/app/oracle/product/11.2.0/server/network/ADMIN` and restart listener.
+Copy `src/oracle/*.ora` to `/oraclexe/app/oracle/product/11.2.0/server/network/ADMIN` and restart listener.
 
 To do that you have to run `cmd.exe` as Administrator and run commands:
 
@@ -28,7 +28,7 @@ You need to set `MAIN` and `*_ENABLED`.
 
 ## PA
 
-Change in `.env` MAIN to PA.
+Change in `.env` MAIN to PA and `PA_ENABLED` to `true`.
 
 ### Run
 
@@ -47,7 +47,7 @@ When you see in console `JBoss ... started in`, open http://localhost:8080/pa-we
 
 ## RTT
 
-Change in `.env` MAIN to RTT.
+Change in `.env` MAIN to RTT `RTT_ENABLED` to `true`.
 
 ### Run
 
