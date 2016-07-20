@@ -30,3 +30,7 @@ Then restart idea.
 ##  node jboss-setup.js - Error: EBUSY: resource busy or locked, unlink
 
 Stop jboss and rerun this command
+
+## org.jboss.msc.service.DuplicateServiceException: Service jboss.web.deployment.default-host./xbg-ab-pa-web.realm is already registered
+
+Run `$JBOSS_HOME/standalone\deployments/*.war*` or `node jboss-setup.sh`.

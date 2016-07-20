@@ -49,6 +49,32 @@ Permissions: [PA]
 
 When you see in console `JBoss ... started in`, open http://localhost:8080/pa-web/frontend/index.jsp?partnerno=6720556 and login as BER07848. If you see `JBoss ... started (with errors) in`, that's not good.
 
+
+## ADMINBOX
+
+Change in `.env` file `ADMINBOX_ENABLED` to `true`.
+
+### Run
+
+```
+cd src
+sh adminbox-all.sh
+node adminbox-npm-setup.js
+```
+
+Later you run specific scripts listed in `adminbox-all.sh`.
+
+For IDEA to update jboss resources, you have to switch from IDEA to another program and back.
+
+### Browser
+
+When you see in console `Deploy took`, open http://localhost:8080/xbg-ab-pa-web.
+
+You have to login with SON04860, as this user can change privileges.
+
+But first you have to add privileges for logging to RTT.
+
+
 ## RTT
 
 Change in `.env` file `RTT_ENABLED` to `true`.
@@ -80,27 +106,6 @@ You have to login with some BER or SON, i.e. BER07848.
 
 But first you have to add privileges for logging to RTT.
 
+### PA and RTT integration
 
-## ADMINBOX
-
-Change in `.env` file `ADMINBOX_ENABLED` to `true`.
-
-### Run
-
-```
-cd src
-sh adminbox-all.sh
-node adminbox-npm-setup.js
-```
-
-Later you run specific scripts listed in `adminbox-all.sh`.
-
-For IDEA to update jboss resources, you have to switch from IDEA to another program and back.
-
-### Browser
-
-When you see in console `Deploy took`, open http://localhost:8080/xbg-ab-pa-web.
-
-You have to login with SON04860, as this user can change privileges.
-
-But first you have to add privileges for logging to RTT.
+1. Run PA in jboss.
