@@ -131,7 +131,7 @@ Basically what should be done for local development:
 
 ### Testing
 
-1. Go to PA in browser in new session.
+1. You may need to relogin to PA.
 2. Startseite > BAUSTEIN ERSTELLEN > Sicherung der Gesundheit > Beihilfe > ZUR PRODUKTAUSWAHL.
 3. You should correct all errors in the form:
   - `Grunddaten > Tätigkeitsstatus > Beamter (auf Probe / Lebenszeit)`
