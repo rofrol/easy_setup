@@ -75,6 +75,12 @@ config = fs.readFileSync(process.env.RTT_CONFIG_BASE, 'utf8');
 
 config = updateValueFromEnv(config, 'disable-auth-filter');
 
+if(process.env.PA_ENABLED === 'true') {
+    config = replaceValue(config, 'paServer.url', valueFromEnv('host-name'));
+} else {
+    config = replaceValue(config, 'paServer.url', .process.env['REMOTE-HOST-NAME']);
+}
+
 fs.outputFileSync(process.env.RTT_CONFIG, config, 'utf8');
 
 
@@ -99,7 +105,12 @@ config = updateValueFromEnv(config, 'storage.flyway.application.datasource.passw
 config = updateValueFromEnv(config, 'feature.export.available');
 config = updateValueFromEnv(config, 'feature.transport.available');
 config = updateValueFromEnv(config, 'feature.import.available');
-config = replaceValue(config, 'paServer.url', valueFromEnv('host-name'));
+
+if(process.env.PA_ENABLED === 'true') {
+    config = replaceValue(config, 'paServer.url', valueFromEnv('host-name'));
+} else {
+    config = replaceValue(config, 'paServer.url', .process.env['REMOTE-HOST-NAME']);
+}
 
 
 fs.outputFileSync(process.env.ADMINBOX_CONFIG, config, 'utf8');
