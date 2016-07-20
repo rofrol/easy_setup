@@ -133,7 +133,7 @@ Basically in PA config RTT should be enabled, and adminbox upload directory shou
   - `Grunddaten > Tätigkeitsstatus > Beamter (auf Probe / Lebenszeit)`
   - `Beihilfeassistent > Dienstherr > Bund`
   - `Beihilfeassistent > Anzahl der berücksichtigungsfähigen Kinder lt. Beihilfebescheid > 1`.
-4. Click refresh button at the bottom right.
+4. Click outside form so it will update and then click refresh button at the bottom right.
 5. There should some rows appear. Click on any of them, but not on checkbox.
 6. Click `Spiechern` at the top right corner.
 7. Fill the form:
