@@ -16,10 +16,8 @@ function mvnOffline() {
   return process.env.OFFLINE === 'true'? '-o': '';
 }
 
-var PROJECT_HOME = process.env[process.env.MAIN + '_HOME'];
-
 try {
-  process.chdir(PROJECT_HOME + '/pa-storage');
+  process.chdir(process.env.PA_HOME + '/pa-storage');
   exec('mvn compile ' + mvnOffline() + ' flyway:migrate -e -Dflyway.locations=filesystem:src/main/resources/db/migration/pa -Dflyway.placeholders.paUser=PA -Dflyway.placeholders.paWorkUser=PAWORK -Dflyway.url=jdbc:oracle:thin:@localhost:1521:XE -Dflyway.table=schema_version -Dflyway.outOfOrder=false -Dflyway.user=PA -Dflyway.password=pa');
   exec('mvn compile ' + mvnOffline() + ' flyway:migrate -e -Dflyway.locations=filesystem:src/main/resources/db/migration/pawork -Dflyway.placeholders.paUser=PA -Dflyway.placeholders.paWorkUser=PAWORK -Dflyway.url=jdbc:oracle:thin:@localhost:1521:XE -Dflyway.table=schema_version -Dflyway.outOfOrder=false -Dflyway.user=PAWORK -Dflyway.password=pawork');
 }

@@ -5,11 +5,9 @@ require('shelljs/global');
 
 var db = require('./db.js');
 
-var PROJECT_HOME = process.env[process.env.MAIN + '_HOME'];
-
 exec('echo exit', {silent:true}).exec(db.SQLPLUS_AS_SYSTEM + ' @oracle/create-tablespaces.sql');
 exec('echo exit', {silent:true}).exec(db.SQLPLUS_AS_SYSTEM + ' @oracle/rtt-users.sql');
-exec('echo exit', {silent:true}).exec(db.SQLPLUS_AS_SYSTEM + ' @' + PROJECT_HOME + '/config/local/usersPARTT.sql');
+exec('echo exit', {silent:true}).exec(db.SQLPLUS_AS_SYSTEM + ' @' + process.env.RTT_HOME + '/config/local/usersPARTT.sql');
 
 // flyway
 
@@ -20,7 +18,7 @@ function mvnOffline() {
 }
 
 try {
-  process.chdir(PROJECT_HOME + '/xbg-rtt-core');
+  process.chdir(process.env.RTT_HOME + '/xbg-rtt-core');
   exec('mvn clean compile ' + mvnOffline() + ' flyway:migrate -e -Dflyway.locations=filesystem:src/main/resources/db/migration/rtt -Dflyway.placeholders.rttUser=PARTT -Dflyway.placeholders.rttWorkUser=PARTTWORK -Dflyway.url=jdbc:oracle:thin:@localhost:1521:XE -Dflyway.table=schema_version -Dflyway.outOfOrder=false -Dflyway.user=PARTT -Dflyway.password=partt');
   exec('mvn clean compile ' + mvnOffline() + ' flyway:migrate -e -Dflyway.locations=filesystem:src/main/resources/db/migration/rttwork -Dflyway.placeholders.rttUser=PARTT -Dflyway.placeholders.rttWorkUser=PARTTWORK -Dflyway.url=jdbc:oracle:thin:@localhost:1521:XE -Dflyway.table=schema_version -Dflyway.outOfOrder=false -Dflyway.user=PARTTWORK -Dflyway.password=parttwork');
 }

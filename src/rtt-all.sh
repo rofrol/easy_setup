@@ -11,5 +11,5 @@ fi
 
 node rtt-oracle-setup.js && \
 node jboss-setup.js && \
-node jboss-deploy.js && \
+node jboss-deploy.js RTT && \
 node jboss-start.js

@@ -24,11 +24,11 @@ lsnrctl start
 
 Then customize `.env` to your needs.
 
-You need to set `MAIN` and `*_ENABLED`.
+You need to set `*_ENABLED`.
 
 ## PA
 
-Change in `.env` MAIN to PA and `PA_ENABLED` to `true`.
+Change in `.env` file `PA_ENABLED` to `true`.
 
 ### Run
 
@@ -51,7 +51,7 @@ When you see in console `JBoss ... started in`, open http://localhost:8080/pa-we
 
 ## RTT
 
-Change in `.env` MAIN to RTT `RTT_ENABLED` to `true`.
+Change in `.env` file `RTT_ENABLED` to `true`.
 
 ### Run
 
@@ -83,7 +83,7 @@ But first you have to add privileges for logging to RTT.
 
 ## ADMINBOX
 
-Change in `.env` MAIN to ADMINBOX `ADMINBOX_ENABLED` to `true`.
+Change in `.env` file `ADMINBOX_ENABLED` to `true`.
 
 ### Run
 

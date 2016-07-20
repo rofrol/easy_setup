@@ -11,5 +11,5 @@ fi
 
 node pa-oracle-setup.js && \
 node jboss-setup.js && \
-node jboss-deploy.js && \
+node jboss-deploy.js PA && \
 node jboss-start.js

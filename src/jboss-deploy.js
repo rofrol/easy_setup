@@ -3,8 +3,10 @@ require('shelljs/global');
 var fs = require('fs-extra');
 var path = require('path');
 
-var PROJECT_HOME = process.env[process.env.MAIN + '_HOME'];
-var PROJECT_WAR = PROJECT_HOME + '/' + process.env[process.env.MAIN + '_WAR'];
+var MAIN = process.argv.slice(2)[0];
+
+var PROJECT_HOME = process.env[MAIN + '_HOME'];
+var PROJECT_WAR = PROJECT_HOME + '/' + process.env[MAIN + '_WAR'];
 
 function mvnOffline() {
   return process.env.OFFLINE === 'true'? '-o': '';
