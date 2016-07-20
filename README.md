@@ -24,8 +24,6 @@ lsnrctl start
 
 Then customize `.env` to your needs.
 
-You need to set `*_ENABLED`.
-
 ## PA
 
 Change in `.env` file `PA_ENABLED` to `true`.
@@ -40,7 +38,7 @@ node pa-npm-setup.js
 
 Later you run specific scripts listed in `pa-all.sh`.
 
-If you run JBoss from IDEA and want to have updated frontend resources, you need to remove exclude for directory `pa-web/target/fronted`.
+If you run JBoss from IDEA and want to have updated frontend resources, you need to remove `exclude` for directory `pa-web/target/fronted`.
 
 Role: ZSC_AWT_BERATER_DE
 Permissions: [PA]
@@ -68,7 +66,7 @@ For IDEA to update jboss resources, you have to switch from IDEA to another prog
 
 ### Browser
 
-When you see in console `Deploy took`, open http://localhost:8080/xbg-ab-pa-web.
+When you see in console `Deploy took ...`, open http://localhost:8080/xbg-ab-pa-web.
 
 You have to login with SON04860, as this user can change privileges.
 
