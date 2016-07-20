@@ -110,7 +110,7 @@ Basically in PA config RTT should be enabled, and adminbox upload directory shou
 
 1. Start jboss with PA, ADMINBOX and RTT wars.
 2. Log in to PA in web browser. You should see what is your static role in console i.e. `Role: ZSC_AWT_BERATER_DE`.
-3. Run IE > File > New session.
+3. Run `IE > File > New session` or delete cookies for localhost domain.
 4. Open ADMINBOX page in browser.
 5. Log in as SON04860.
 6. Click on `Rollen und Berechtigungen`.
