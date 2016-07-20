@@ -99,7 +99,7 @@ For IDEA to update jboss resources, you have to switch from IDEA to another prog
 
 ### Browser
 
-When you see in console `JBoss ... started in`, open http://localhost:8080/xbg-ab-pa-web. If you see `JBoss ... started (with errors) in`, that's not good.
+When you see in console `Deploy took`, open http://localhost:8080/xbg-ab-pa-web.
 
 You have to login with SON04860, as this user can change privileges.
 
