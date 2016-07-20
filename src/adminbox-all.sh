@@ -11,5 +11,4 @@ fi
 
 node adminbox-oracle-setup.js && \
 node jboss-setup.js && \
-node jboss-deploy.js ADMINBOX && \
-node jboss-start.js
+node jboss-deploy.js ADMINBOX
