@@ -79,3 +79,28 @@ When you see in console `JBoss ... started in`, open http://localhost:8080/xbg-r
 You have to login with some BER or SON, i.e. BER07848.
 
 But first you have to add privileges for logging to RTT.
+
+
+## ADMINBOX
+
+Change in `.env` MAIN to ADMINBOX `ADMINBOX_ENABLED` to `true`.
+
+### Run
+
+```
+cd src
+sh adminbox-all.sh
+node adminbox-npm-setup.js
+```
+
+Later you run specific scripts listed in `adminbox-all.sh`.
+
+For IDEA to update jboss resources, you have to switch from IDEA to another program and back.
+
+### Browser
+
+When you see in console `JBoss ... started in`, open http://localhost:8080/xbg-rtt-web/. If you see `JBoss ... started (with errors) in`, that's not good.
+
+You have to login with some BER or SON, i.e. BER07848.
+
+But first you have to add privileges for logging to RTT.
