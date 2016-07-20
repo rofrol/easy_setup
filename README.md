@@ -106,7 +106,11 @@ But first you have to add privileges for logging to RTT.
 
 ### Config
 
-Basically in PA config RTT should be enabled, and adminbox upload directory should be the same in PA and ADMINBOX directory.
+Basically what should be done for local development:
+
+- RTT is enabled in PA config
+- adminbox upload directory is the same in PA and ADMINBOX directory
+- JBoss is started with PA and RTT wars.
 
 1. Start jboss with PA, ADMINBOX and RTT wars.
 2. Log in to PA in web browser. You should see what is your static role in console i.e. `Role: ZSC_AWT_BERATER_DE`.
