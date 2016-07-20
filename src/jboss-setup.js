@@ -78,7 +78,7 @@ config = updateValueFromEnv(config, 'disable-auth-filter');
 if(process.env.PA_ENABLED === 'true') {
     config = replaceValue(config, 'paServer.url', valueFromEnv('host-name'));
 } else {
-    config = replaceValue(config, 'paServer.url', .process.env['REMOTE-HOST-NAME']);
+    config = replaceValue(config, 'paServer.url', process.env['REMOTE_HOST_NAME']);
 }
 
 fs.outputFileSync(process.env.RTT_CONFIG, config, 'utf8');
@@ -109,7 +109,7 @@ config = updateValueFromEnv(config, 'feature.import.available');
 if(process.env.PA_ENABLED === 'true') {
     config = replaceValue(config, 'paServer.url', valueFromEnv('host-name'));
 } else {
-    config = replaceValue(config, 'paServer.url', .process.env['REMOTE-HOST-NAME']);
+    config = replaceValue(config, 'paServer.url', process.env['REMOTE_HOST_NAME']);
 }
 
 
@@ -134,7 +134,9 @@ function replaceValue(string, key, value) {
 }
 
 function envifyKey(key) {
-    return key.toUpperCase().replace(/\./g, '_');
+    var envified = key.toUpperCase().replace(/[.-]/g, '_');
+    // console.log(envified);
+    return envified;
 }
 
 function valueFromEnv(key) {
