@@ -16,7 +16,9 @@ function mvnUpdate() {
 
 try {
   process.chdir(PROJECT_HOME);
-  exec('mvn clean ' + mvnOffline() + ' install -T 4 ' + mvnUpdate() + ' -DskipTests -P development');
+  // development probably not needed, as we need to run grunt/gulp manually anyway
+  // exec('mvn clean ' + mvnOffline() + ' install -T 4 ' + mvnUpdate() + ' -DskipTests -P development');
+  exec('mvn clean ' + mvnOffline() + ' install -T 4 ' + mvnUpdate() + ' -DskipTests');
 }
 catch (err) {
   console.log('chdir: ' + err);
