@@ -45,6 +45,7 @@ standalone = standalone
     .replace(/                <datasource><\/datasource>/g, datasources.join('\n'))
     .replace(new RegExp('"/projects/xbg-pa/config/localConfigExample"', 'g'), '"' + path.dirname(process.env.PA_CONFIG) + '"')
     .replace(new RegExp('"/projects/xbg-rtt/config/local"', 'g'), '"' + path.dirname(process.env.PA_CONFIG) + '"')
+    .replace(new RegExp('"/projects/xbg-adminbox/config/local"', 'g'), '"' + path.dirname(process.env.ADMINBOX_CONFIG) + '"')
     .replace(/localhost:1521:XE/, db.ORACLE_HOSTNAME);
 
 fs.outputFileSync(process.env.JBOSS_HOME + '/standalone/configuration/standalone.xml', standalone, 'utf8');
@@ -76,6 +77,34 @@ config = updateValueFromEnv(config, 'disable-auth-filter');
 
 fs.outputFileSync(process.env.RTT_CONFIG, config, 'utf8');
 
+
+//************************************************************************
+// Adminbox PA config
+//************************************************************************
+
+config = fs.readFileSync(process.env.ADMINBOX_CONFIG_BASE, 'utf8');
+
+config = updateValueFromEnv(config, 'disable-auth-filter');
+config = replaceValue(config, 'releaseDirectory', valueFromEnv('adminboxUploadDirectory'));
+config = replaceValue(config, 'transportDirectory', valueFromEnv('adminboxUploadDirectory') + '/export');
+config = updateValueFromEnv(config, 'host-name');
+config = replaceValue(config, 'storage.flyway.admin.datasource.url', 'jdbc:oracle:thin:@' + db.ORACLE_HOSTNAME);
+config = replaceValue(config, 'storage.flyway.admin.datasource.driver', 'oracle.jdbc.OracleDriver');
+config = updateValueFromEnv(config, 'storage.flyway.admin.datasource.username');
+config = updateValueFromEnv(config, 'storage.flyway.admin.datasource.password');
+config = replaceValue(config, 'storage.flyway.application.datasource.url', 'jdbc:oracle:thin:@' + db.ORACLE_HOSTNAME);
+config = replaceValue(config, 'storage.flyway.application.datasource.driver', 'oracle.jdbc.OracleDriver');
+config = updateValueFromEnv(config, 'storage.flyway.application.datasource.username');
+config = updateValueFromEnv(config, 'storage.flyway.application.datasource.password');
+config = updateValueFromEnv(config, 'feature.export.available');
+config = updateValueFromEnv(config, 'feature.transport.available');
+config = updateValueFromEnv(config, 'feature.import.available');
+config = replaceValue(config, 'paServer.url', valueFromEnv('host-name'));
+
+
+fs.outputFileSync(process.env.ADMINBOX_CONFIG, config, 'utf8');
+
+
 //************************************************************************
 // Helper functions
 //************************************************************************
@@ -85,18 +114,25 @@ function updateValueFromEnv(string, key) {
 }
 
 function replaceValue(string, key, value) {
-    var regex = new RegExp('^\\s*' + key.replace('.', '\\.') + '\\s*=.*', 'gm');
-    //console.log('regex=' + regex);
-    //console.log('regex.test(string):' ,regex.test(string));
+    var regex = new RegExp('^\\s*#?\\s*' + key.replace(/\./g, '\\.') + '\\s*=.*', 'gm');
+    if(!regex.test(string)) {
+      console.log('Failed to replace regex: ' + regex + ' with value: ' + value);
+      process.exit(1);
+    }
     return string.replace(regex, key + ' = ' + value);
 }
 
 function envifyKey(key) {
-    return key.toUpperCase().replace('.', '_');
+    return key.toUpperCase().replace(/\./g, '_');
 }
 
 function valueFromEnv(key) {
-    return process.env[envifyKey(key)];
+    var value = process.env[envifyKey(key)];
+    if(typeof value === 'undefined') {
+        console.log('Failed to get value for key: ' + key + ' from env');
+        process.exit(1);
+    }
+    return value;
 }
 
 // http://stackoverflow.com/questions/10058814/get-data-from-fs-readfile/14078644#14078644
