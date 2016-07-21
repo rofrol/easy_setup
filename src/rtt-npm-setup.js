@@ -1,4 +1,4 @@
-require('dotenv').config({path: '../.env'});
+require('dotenv').config({path: '.env'});
 
 if(process.env.OFFLINE === 'true') {
   process.exit();

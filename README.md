@@ -20,7 +20,10 @@ lsnrctl start
 
 ## Prepare config
 
-`cp .env.example .env`
+```
+cd src
+cp .env.example .env
+```
 
 Then customize `.env` to your needs.
 
