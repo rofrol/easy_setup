@@ -22,7 +22,7 @@ Basically what should be done for local development:
 11. Kundenbeziehung: -
 12. Testfalltemplate aufzeichnen: checked
 13. Click `Speichern`
-14. Open in file explorer directory which is set in env `ADMINBOXUPLOADDIRECTORY`.
+14. Open in file explorer directory which is set in .env in `ADMINBOXUPLOADDIRECTORY`.
 15. Go back to browser and click `Übergabe an PA`.
 16. You should see in file explorer `rollen.json`. After 30s this file should dissapear and permissions should be updated in PA database.
 
