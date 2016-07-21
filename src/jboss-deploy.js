@@ -20,9 +20,13 @@ function mvnProfile() {
   return process.env.MVN_PROFILE !== ''? ' -P ' + process.env.MVN_PROFILE: '';
 }
 
+function mvnSkipTests() {
+  return process.env.MVN_SKIPTESTS === 'true'? ' -DskipTests': '';
+}
+
 try {
   process.chdir(PROJECT_HOME);
-  exec('mvn clean' + mvnOffline() + ' install -T 4' + mvnUpdate() + ' -DskipTests'  + mvnProfile();
+  exec('mvn clean' + mvnOffline() + ' install -T 4' + mvnUpdate() + mvnSkipTests() + mvnProfile();
 }
 catch (err) {
   console.log('chdir: ' + err);
