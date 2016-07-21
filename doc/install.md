@@ -43,9 +43,6 @@ Later you run specific scripts listed in `pa-all.sh`.
 
 If you run JBoss from IDEA and want to have updated frontend resources, you need to remove `exclude` for directory `pa-web/target/fronted`.
 
-Role: ZSC_AWT_BERATER_DE
-Permissions: [PA]
-
 ### Browser
 
 When you see in console `JBoss ... started in`, open http://localhost:8080/pa-web/frontend/index.jsp?partnerno=6720556 and login as BER07848. If you see `JBoss ... started (with errors) in`, that's not good.
