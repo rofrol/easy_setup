@@ -10,5 +10,6 @@ if [ ! -d "$DIR/../node_modules" ]; then
 fi
 
 node rtt-oracle-setup.js && \
+node rtt-npm-setup.js && \
 node jboss-setup.js && \
 node jboss-deploy.js RTT

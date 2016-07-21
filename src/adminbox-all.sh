@@ -10,5 +10,6 @@ if [ ! -d "$DIR/../node_modules" ]; then
 fi
 
 node adminbox-oracle-setup.js && \
+node adminbox-npm-setup.js && \
 node jboss-setup.js && \
 node jboss-deploy.js ADMINBOX
