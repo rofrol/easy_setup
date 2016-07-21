@@ -36,8 +36,6 @@ Change in `.env` file `PA_ENABLED` to `true`.
 ```
 cd src
 ./pa-all.sh
-cd $PA_HOME/pa-web
-gulp development
 ```
 
 Later you run specific scripts listed in `pa-all.sh`.
@@ -61,8 +59,6 @@ Change in `.env` file `ADMINBOX_ENABLED` to `true`.
 ```
 cd src
 ./adminbox-all.sh
-cd $ADMINBOX_HOME/xbg-ab-web/
-grunt
 ```
 
 Later you run specific scripts listed in `adminbox-all.sh`.
@@ -85,8 +81,6 @@ Change in `.env` file `RTT_ENABLED` to `true`.
 ```
 cd src
 ./rtt-all.sh
-cd $RTT_HOME/xbg-ab-web/
-grunt
 ```
 
 Later you run specific scripts listed in `rtt-all.sh`.
