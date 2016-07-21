@@ -10,22 +10,17 @@ var PROJECT_WAR = PROJECT_HOME + '/' + process.env[MAIN + '_WAR'];
 
 function offline(option) {
     if(option === 'mvnOffline') return process.env.OFFLINE === 'true'? '-o': '';
-    if(option === 'mvnUpdate') return process.env.OFFLINE === 'true'? '': '-U';
     if(option === 'mvnProfile') return process.env.OFFLINE === 'true'? '-P development': '';
 }
 
 function mvnUpdate() {
-  return process.env.OFFLINE === 'true'? '': '-U';
-}
-
-function mvnUpdate() {
-  return process.env.OFFLINE === 'true'? '': '-U';
+  return process.env.MVN_UPDATE === 'true'? '': '-U';
 }
 
 try {
   process.chdir(PROJECT_HOME);
   // `-P development` probably not needed, as we need to run grunt/gulp manually anyway
-  exec('mvn clean ' + offline('mvnOffline') + ' install -T 4 ' + offline('mvnUpdate') + ' -DskipTests'  + offline('mvnProfile'));
+  exec('mvn clean ' + offline('mvnOffline') + ' install -T 4 ' + mvnUpdate() + ' -DskipTests'  + offline('mvnProfile'));
 }
 catch (err) {
   console.log('chdir: ' + err);
