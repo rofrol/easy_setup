@@ -34,3 +34,7 @@ Stop jboss and rerun this command
 ## org.jboss.msc.service.DuplicateServiceException: Service jboss.web.deployment.default-host./xbg-ab-pa-web.realm is already registered
 
 Run `$JBOSS_HOME/standalone\deployments/*.war*` or `node jboss-setup.sh`.
+
+## Server responds with 404
+
+You have to run gulp or grunt. Then for IDEA to update jboss resources, you have to switch from IDEA to another program and back.

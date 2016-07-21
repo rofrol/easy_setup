@@ -34,6 +34,8 @@ Change in `.env` file `PA_ENABLED` to `true`.
 cd src
 sh pa-all.sh
 node pa-npm-setup.js
+cd $PA_HOME/pa-web
+gulp development
 ```
 
 Later you run specific scripts listed in `pa-all.sh`.
@@ -58,6 +60,8 @@ Change in `.env` file `ADMINBOX_ENABLED` to `true`.
 cd src
 sh adminbox-all.sh
 node adminbox-npm-setup.js
+cd $ADMINBOX_HOME/xbg-ab-web/
+grunt
 ```
 
 Later you run specific scripts listed in `adminbox-all.sh`.
@@ -81,18 +85,11 @@ Change in `.env` file `RTT_ENABLED` to `true`.
 cd src
 sh rtt-all.sh
 node rtt-npm-setup.js
-```
-
-Later you run specific scripts listed in `rtt-all.sh`.
-
-Now stop this script. Then run jboss from Intellij IDEA. After that run:
-
-```
-cd xbg-rtt-web
+cd $RTT_HOME/xbg-ab-web/
 grunt
 ```
 
-For IDEA to update jboss resources, you have to switch from IDEA to another program and back.
+Later you run specific scripts listed in `rtt-all.sh`.
 
 ### Browser
 
