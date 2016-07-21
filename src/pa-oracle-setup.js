@@ -4,10 +4,10 @@ require('shelljs/global');
 
 // sql
 
-var db = require('./db.js');
+var config = require('./config.js');
 
-exec('echo exit', {silent:true}).exec(db.SQLPLUS_AS_SYSTEM + ' @oracle/create-tablespaces.sql');
-exec('echo exit', {silent:true}).exec(db.SQLPLUS_AS_SYSTEM + ' @oracle/pa-users.sql');
+exec('echo exit', {silent:true}).exec(config.SQLPLUS_AS_SYSTEM + ' @oracle/create-tablespaces.sql');
+exec('echo exit', {silent:true}).exec(config.SQLPLUS_AS_SYSTEM + ' @oracle/pa-users.sql');
 
 // flyway
 
@@ -31,6 +31,6 @@ catch (err) {
 // From: Ostrowka Pawel
 // Date: 2016-04-01 18:17
 exec("echo INSERT INTO PA_ROLE_RIGHT_STATIC (PA_ROLE, PA_RIGHT, CREATED_DATE, VERSION, AGENT, INHERITABLE) VALUES ('ZSC_AWT_BERATER_DE', 'PA', sysdate, sysdate, 'Adminbox', 'N');", {silent:true})
-.exec('sqlplus -s pa/pa@' + db.ORACLE_HOSTNAME);
+.exec('sqlplus -s pa/pa@' + config.ORACLE_HOSTNAME);
 
 // http://stackoverflow.com/questions/19803748/change-working-directory-in-my-current-shell-context-when-running-node-script

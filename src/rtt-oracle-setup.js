@@ -4,11 +4,11 @@ require('shelljs/global');
 
 // sql
 
-var db = require('./db.js');
+var config = require('./config.js');
 
-exec('echo exit', {silent:true}).exec(db.SQLPLUS_AS_SYSTEM + ' @oracle/create-tablespaces.sql');
-exec('echo exit', {silent:true}).exec(db.SQLPLUS_AS_SYSTEM + ' @oracle/rtt-users.sql');
-exec('echo exit', {silent:true}).exec(db.SQLPLUS_AS_SYSTEM + ' @' + process.env.RTT_HOME + '/config/local/usersPARTT.sql');
+exec('echo exit', {silent:true}).exec(config.SQLPLUS_AS_SYSTEM + ' @oracle/create-tablespaces.sql');
+exec('echo exit', {silent:true}).exec(config.SQLPLUS_AS_SYSTEM + ' @oracle/rtt-users.sql');
+exec('echo exit', {silent:true}).exec(config.SQLPLUS_AS_SYSTEM + ' @' + process.env.RTT_HOME + '/config/local/usersPARTT.sql');
 
 // flyway
 

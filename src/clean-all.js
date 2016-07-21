@@ -7,9 +7,9 @@ var rimraf = require('rimraf');
 
 // sql
 
-var db = require('./db.js');
+var config = require('./config.js');
 
-exec('echo exit', {silent:true}).exec(db.SQLPLUS_AS_SYSTEM + ' @oracle/drop-tablespaces.sql');
+exec('echo exit', {silent:true}).exec(config.SQLPLUS_AS_SYSTEM + ' @oracle/drop-tablespaces.sql');
 
 function getUserHome() {
   return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];

@@ -9,7 +9,7 @@ if [ ! -d "$DIR/../node_modules" ]; then
   exit 1;
 fi
 
-./pa-oracle-setup.js && \
 ./pa-npm-setup.js && \
 ./jboss-setup.js && \
-./jboss-deploy.js PA
+./mvn-install.js PA && \
+./pa-oracle-setup.js

@@ -12,7 +12,7 @@ var path = require('path');
 fs.mkdirsSync(process.env.BUNDLER_DOCUMENTPOOLDIRECTORYPATH);
 
 fs.copySync('modules', path.resolve(process.env.JBOSS_HOME, 'modules'), {clobber: true});
-fs.removeSync(path.resolve(process.env.JBOSS_HOME, 'standalone/deployments/*.war*'));
+fs.removeSync(process.env.JBOSS_HOME + '/standalone/deployments/*.war*');
 
 //************************************************************************
 // standalone.xml
@@ -38,7 +38,7 @@ if(process.env.RTT_ENABLED === 'true') {
 bindings.push('            </bindings>');
 
 
-var db = require('./db.js');
+var config = require('./config.js');
 var standalone = fs.readFileSync('jboss/standalone-' + process.env.JBOSS_VERSION + '.xml', 'utf8');
 
 standalone = standalone
@@ -47,7 +47,7 @@ standalone = standalone
     .replace(new RegExp('"/projects/xbg-pa/config/localConfigExample"', 'g'), '"' + path.dirname(process.env.PA_CONFIG) + '"')
     .replace(new RegExp('"/projects/xbg-rtt/config/local"', 'g'), '"' + path.dirname(process.env.PA_CONFIG) + '"')
     .replace(new RegExp('"/projects/xbg-adminbox/config/local"', 'g'), '"' + path.dirname(process.env.ADMINBOX_CONFIG) + '"')
-    .replace(/localhost:1521:XE/, db.ORACLE_HOSTNAME);
+    .replace(/localhost:1521:XE/, config.ORACLE_HOSTNAME);
 
 fs.outputFileSync(process.env.JBOSS_HOME + '/standalone/configuration/standalone.xml', standalone, 'utf8');
 
@@ -95,11 +95,11 @@ config = updateValueFromEnv(config, 'disable-auth-filter');
 config = replaceValue(config, 'releaseDirectory', valueFromEnv('adminboxUploadDirectory'));
 config = replaceValue(config, 'transportDirectory', valueFromEnv('adminboxUploadDirectory') + '/export');
 config = updateValueFromEnv(config, 'host-name');
-config = replaceValue(config, 'storage.flyway.admin.datasource.url', 'jdbc:oracle:thin:@' + db.ORACLE_HOSTNAME);
+config = replaceValue(config, 'storage.flyway.admin.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
 config = replaceValue(config, 'storage.flyway.admin.datasource.driver', 'oracle.jdbc.OracleDriver');
 config = updateValueFromEnv(config, 'storage.flyway.admin.datasource.username');
 config = updateValueFromEnv(config, 'storage.flyway.admin.datasource.password');
-config = replaceValue(config, 'storage.flyway.application.datasource.url', 'jdbc:oracle:thin:@' + db.ORACLE_HOSTNAME);
+config = replaceValue(config, 'storage.flyway.application.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
 config = replaceValue(config, 'storage.flyway.application.datasource.driver', 'oracle.jdbc.OracleDriver');
 config = updateValueFromEnv(config, 'storage.flyway.application.datasource.username');
 config = updateValueFromEnv(config, 'storage.flyway.application.datasource.password');

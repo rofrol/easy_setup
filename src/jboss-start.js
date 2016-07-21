@@ -2,6 +2,13 @@
 require('dotenv').config();
 require('shelljs/global');
 var path = require('path');
+var fs = require('fs-extra');
+var config = require('./config.js');
+
+var PROJECT_WAR = config.projectWar();
+
+fs.removeSync(process.env.JBOSS_HOME + '/standalone/deployments/*.war*');
+fs.copySync(PROJECT_WAR, process.env.JBOSS_HOME + '/standalone/deployments/' + path.basename(PROJECT_WAR));
 
 try {
   process.chdir(process.env.JBOSS_HOME + '/bin');

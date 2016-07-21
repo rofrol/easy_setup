@@ -11,7 +11,7 @@ fi
 
 ./rtt-npm-setup.js && \
 ./jboss-setup.js && \
-./jboss-deploy.js RTT && \
+./mvn-install.js RTT && \
 ./rtt-oracle-setup.js
 
 # oracle migration needs xbg-rtt-core so it's run after mvn install

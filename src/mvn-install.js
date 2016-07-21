@@ -3,11 +3,9 @@ require('dotenv').config();
 require('shelljs/global');
 var fs = require('fs-extra');
 var path = require('path');
+var config = require('./config.js');
 
-var MAIN = process.argv.slice(2)[0];
-
-var PROJECT_HOME = process.env[MAIN + '_HOME'];
-var PROJECT_WAR = PROJECT_HOME + '/' + process.env[MAIN + '_WAR'];
+var PROJECT_HOME = config.projectHome();
 
 function mvnOffline() {
     return process.env.OFFLINE === 'true'? ' -o': '';
@@ -32,6 +30,3 @@ try {
 catch (err) {
   console.log('chdir: ' + err);
 }
-
-fs.removeSync(process.env.JBOSS_HOME + '/standalone/deployments/*.war*');
-fs.copySync(PROJECT_WAR, process.env.JBOSS_HOME + '/standalone/deployments/' + path.basename(PROJECT_WAR));
