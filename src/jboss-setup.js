@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 require('dotenv').config();
 
 var fs = require('fs-extra');

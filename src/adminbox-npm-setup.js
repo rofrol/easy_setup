@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 require('dotenv').config();
 
 if(process.env.OFFLINE === 'true') {

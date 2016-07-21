@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 require('dotenv').config();
 var ORACLE_HOSTNAME = process.env.ORACLE_HOST + ':' + process.env.ORACLE_PORT + '/' + process.env.ORACLE_SID_NAME;
 var SQLPLUS_AS_SYSTEM = 'sqlplus -s system/' + process.env.ORACLE_SYSTEM_PASSWORD + '@' + ORACLE_HOSTNAME;

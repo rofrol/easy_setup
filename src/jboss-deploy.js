@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 require('dotenv').config();
 require('shelljs/global');
 var fs = require('fs-extra');

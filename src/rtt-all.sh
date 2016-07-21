@@ -9,7 +9,7 @@ if [ ! -d "$DIR/../node_modules" ]; then
   exit 1;
 fi
 
-node rtt-oracle-setup.js && \
-node rtt-npm-setup.js && \
-node jboss-setup.js && \
-node jboss-deploy.js RTT
+./rtt-oracle-setup.js && \
+./rtt-npm-setup.js && \
+./jboss-setup.js && \
+./jboss-deploy.js RTT

@@ -9,7 +9,7 @@ if [ ! -d "$DIR/../node_modules" ]; then
   exit 1;
 fi
 
-node adminbox-oracle-setup.js && \
-node adminbox-npm-setup.js && \
-node jboss-setup.js && \
-node jboss-deploy.js ADMINBOX
+./adminbox-oracle-setup.js && \
+./adminbox-npm-setup.js && \
+./jboss-setup.js && \
+./jboss-deploy.js ADMINBOX

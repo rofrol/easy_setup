@@ -35,8 +35,7 @@ Change in `.env` file `PA_ENABLED` to `true`.
 
 ```
 cd src
-sh pa-all.sh
-node pa-npm-setup.js
+./pa-all.sh
 cd $PA_HOME/pa-web
 gulp development
 ```
@@ -61,8 +60,7 @@ Change in `.env` file `ADMINBOX_ENABLED` to `true`.
 
 ```
 cd src
-sh adminbox-all.sh
-node adminbox-npm-setup.js
+./adminbox-all.sh
 cd $ADMINBOX_HOME/xbg-ab-web/
 grunt
 ```
@@ -86,8 +84,7 @@ Change in `.env` file `RTT_ENABLED` to `true`.
 
 ```
 cd src
-sh rtt-all.sh
-node rtt-npm-setup.js
+./rtt-all.sh
 cd $RTT_HOME/xbg-ab-web/
 grunt
 ```
