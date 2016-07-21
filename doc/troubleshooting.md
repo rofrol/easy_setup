@@ -38,3 +38,7 @@ Run `$JBOSS_HOME/standalone\deployments/*.war*` or `node jboss-setup.sh`.
 ## Server responds with 404
 
 You have to run gulp or grunt. Then for IDEA to update jboss resources, you have to switch from IDEA to another program and back.
+
+## org.apache.jasper.JasperException: JBWEB004062: Unable to compile class for JSP
+
+Probably you run jboss-6.2 with jdk-8. Run it with jdk-7.
