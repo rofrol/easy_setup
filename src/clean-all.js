@@ -33,6 +33,7 @@ console.log('cleaning git repos');
 
 try {
   process.chdir(process.env.PA_HOME);
+  rimraf.sync('pa-web/node_modules')
   exec('git clean -fdx');
   exec('git checkout -f master');
 }
@@ -42,6 +43,7 @@ catch (err) {
 
 try {
   process.chdir(process.env.ADMINBOX_HOME);
+  rimraf.sync('xbg-ab-web/node_modules')
   exec('git clean -fdx');
   exec('git checkout -f develop-pa');
 
@@ -52,6 +54,7 @@ catch (err) {
 
 try {
   process.chdir(process.env.RTT_HOME);
+  rimraf.sync('xbg-rtt-web/node_modules')
   exec('git clean -fdx');
   exec('git checkout -f master');
 }
