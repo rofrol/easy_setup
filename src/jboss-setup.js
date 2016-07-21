@@ -1,4 +1,4 @@
-require('dotenv').config({path: '.env'});
+require('dotenv').config();
 
 var fs = require('fs-extra');
 var path = require('path');

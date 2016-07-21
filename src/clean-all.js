@@ -1,4 +1,4 @@
-require('dotenv').config({path: '.env'});
+require('dotenv').config();
 require('shelljs/global');
 var path = require('path');
 var rimraf = require('rimraf');
