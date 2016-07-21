@@ -14,7 +14,10 @@ function getUserHome() {
   return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 }
 
+console.log('removing ~/.m2');
 rimraf.sync(getUserHome() + '/.m2');
+
+console.log('removing JBOSS_HOME)');
 rimraf.sync(process.env.JBOSS_HOME);
 
 try {
@@ -25,6 +28,8 @@ try {
 catch (err) {
   console.log('chdir: ' + err);
 }
+
+console.log('cleaning git repos');
 
 try {
   process.chdir(process.env.PA_HOME);
