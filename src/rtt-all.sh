@@ -9,7 +9,9 @@ if [ ! -d "$DIR/../node_modules" ]; then
   exit 1;
 fi
 
-./rtt-oracle-setup.js && \
 ./rtt-npm-setup.js && \
 ./jboss-setup.js && \
-./jboss-deploy.js RTT
+./jboss-deploy.js RTT && \
+./rtt-oracle-setup.js
+
+# oracle migration needs xbg-rtt-core so it's run after mvn install
