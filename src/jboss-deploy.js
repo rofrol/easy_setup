@@ -26,7 +26,7 @@ function mvnSkipTests() {
 
 try {
   process.chdir(PROJECT_HOME);
-  exec('mvn clean' + mvnOffline() + ' install -T 4' + mvnUpdate() + mvnSkipTests() + mvnProfile();
+  exec('mvn clean' + mvnOffline() + ' install -T 4' + mvnUpdate() + mvnSkipTests() + mvnProfile());
 }
 catch (err) {
   console.log('chdir: ' + err);
