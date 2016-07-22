@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-require('dotenv').config();
-
+var config = require('./config.js');
 var fs = require('fs-extra');
 var path = require('path');
 

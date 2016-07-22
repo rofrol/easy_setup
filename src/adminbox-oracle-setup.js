@@ -1,10 +1,8 @@
 #!/usr/bin/env node
-require('dotenv').config();
+var config = require('./config.js');
 require('shelljs/global');
 
 // sql
-
-var config = require('./config.js');
 
 exec('echo exit', {silent:true}).exec(config.SQLPLUS_AS_SYSTEM + ' @oracle/create-tablespaces.sql');
 exec('echo exit', {silent:true}).exec(config.SQLPLUS_AS_SYSTEM + ' @oracle/adminbox-users.sql');

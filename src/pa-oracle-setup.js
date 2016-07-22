@@ -1,10 +1,9 @@
 #!/usr/bin/env node
-require('dotenv').config();
+var config = require('./config.js');
+var chdir = require('./chdir');
 require('shelljs/global');
 
 // sql
-
-var config = require('./config.js');
 
 exec('echo exit', {silent:true}).exec(config.SQLPLUS_AS_SYSTEM + ' @oracle/create-tablespaces.sql');
 exec('echo exit', {silent:true}).exec(config.SQLPLUS_AS_SYSTEM + ' @oracle/pa-users.sql');
@@ -17,14 +16,10 @@ function mvnOffline() {
   return process.env.OFFLINE === 'true'? '-o': '';
 }
 
-try {
-  process.chdir(process.env.PA_HOME + '/pa-storage');
+chdir(process.env.PA_HOME + '/pa-storage', function() {
   exec('mvn compile ' + mvnOffline() + ' flyway:migrate -e -Dflyway.locations=filesystem:src/main/resources/db/migration/pa -Dflyway.placeholders.paUser=PA -Dflyway.placeholders.paWorkUser=PAWORK -Dflyway.url=jdbc:oracle:thin:@localhost:1521:XE -Dflyway.table=schema_version -Dflyway.outOfOrder=false -Dflyway.user=PA -Dflyway.password=pa');
   exec('mvn compile ' + mvnOffline() + ' flyway:migrate -e -Dflyway.locations=filesystem:src/main/resources/db/migration/pawork -Dflyway.placeholders.paUser=PA -Dflyway.placeholders.paWorkUser=PAWORK -Dflyway.url=jdbc:oracle:thin:@localhost:1521:XE -Dflyway.table=schema_version -Dflyway.outOfOrder=false -Dflyway.user=PAWORK -Dflyway.password=pawork');
-}
-catch (err) {
-  console.log('chdir: ' + err);
-}
+});
 
 // Operation not authorized: Sie verf▒gen nicht ▒ber ausreichende Berechtigungen.
 // Title: [PA] Permissions update
