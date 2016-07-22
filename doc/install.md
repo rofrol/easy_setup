@@ -97,4 +97,6 @@ In src directory run:
 
 `MAIN=RTT gulp`
 
+If you see error `Address already in use`, you have to close terminal and kill node processes.
+
 Open http://localhost:8126/
