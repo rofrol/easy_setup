@@ -97,6 +97,9 @@ In src directory run:
 
 `MAIN=RTT gulp`
 
-If you see error `Address already in use`, you have to close terminal and kill node processes.
-
 Open http://localhost:8126/
+
+#### Troubleshootinhg
+
+- If there is error in terminal `Address already in use`, close terminal and kill node processes.
+- If livereload stops working, rerun it.
