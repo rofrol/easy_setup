@@ -25,8 +25,15 @@ cd src
 cp .env.example .env
 ```
 
-Then customize `.env` to your needs.
+Then customize `.env` to your needs. For example
 
+```
+RTT_HOME=/path/to/xbg-rtt
+```
+
+So RTT on Windows is in `C:\path\to\xbg-rtt`.
+
+For paths use forward slashes, no trailing slash, no leading `/c`.
 
 ## PA
 
@@ -91,7 +98,16 @@ You have to login with some BER or SON, i.e. BER07848.
 
 ### Live reload
 
-In .env set `DISABLE_AUTH_FILTER=true`.
+You need .env file: `cp .env.example .env`
+
+In .env set
+
+```
+DISABLE_AUTH_FILTER=true
+RTT_HOME=/path/to/xbg-rtt
+```
+
+Read more about .env in chapter `## Prepare config`.
 
 In src directory run:
 
