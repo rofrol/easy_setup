@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 var config = require('./config.js');
 var chdir = require('./chdir');
+var npm_install = require('./npm_install');
 
 if(process.env.OFFLINE === 'true') {
   process.exit();
@@ -9,7 +10,7 @@ if(process.env.OFFLINE === 'true') {
 require('shelljs/global');
 var fs = require('fs-extra');
 
-exec('npm i -g grunt');
+npm_install(grunt);
 
 var path = require('path');
 
