@@ -2,22 +2,23 @@
 var config = require('./config.js');
 var chdir = require('./chdir');
 var npm_install = require('./npm_install');
+var fs = require('fs-extra');
+var rimraf = require('rimraf');
 
 if(process.env.OFFLINE === 'true') {
+  console.log('Exiting because OFFLINE === true')
   process.exit();
 }
 
 require('shelljs/global');
-var fs = require('fs-extra');
 
 npm_install('grunt');
 
-var path = require('path');
-
 chdir(process.env.ADMINBOX_HOME + '/xbg-ab-web', function() {
   if(process.env.NPM_CLEAN === 'true') {
-    fs.removeSync('node_modules');
+    rimraf.sync('node_modules');
   }
+
   exec('npm i node-sass@3.4.2');
   exec('npm i');
   exec('grunt');

@@ -7,18 +7,19 @@ function chdir (dir, cb) {
         console.log('Cannot cd to undefined');
         process.exit(1);
     }
-    
+
     chdir.push();
 
     try {
       process.chdir(dir);
+      console.log('process.cwd():', process.cwd());
+      if (cb) cb();
     }
     catch (err) {
       console.log('chdir: ' + err);
       console.log('dir:', dir);
     }
 
-    if (cb) cb();
     chdir.pop();
 };
 chdir.stack = [];

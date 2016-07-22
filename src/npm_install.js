@@ -8,18 +8,12 @@ function npm_install(package) {
   exec('npm root -g', function(status, output) {
     var packages = fs.readdirSync(output.replace(/\n/, ''));
     if (packages.indexOf(package) === -1) {
-      exec('npm i -g ' + package);
+      var cmd = 'npm i -g ' + package;
+      console.log(cmd);
+      exec(cmd);
     }
   });
 }
-
-// for m in $nodejs_modules; do
-//     if ! echo "$nodejs_modules_installed" | grep -q "\\s$m"@; then
-//         npm install -g "$m"
-//     else
-//         npm update -g "$m"
-//     fi
-// done
 
 // http://stackoverflow.com/questions/31111033/npm-dont-install-module-every-time
 // http://stackoverflow.com/questions/17937960/how-to-list-npm-user-installed-packages
