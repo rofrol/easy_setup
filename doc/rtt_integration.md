@@ -10,10 +10,10 @@ Basically what should be done for local development:
 - JBoss is started with PA and RTT wars.
 
 1. Start jboss with PA, ADMINBOX and RTT wars.
-2. Log in to PA as BER in web browser. You should see what is your static role in console i.e. `Role: ZSC_AWT_BERATER_DE`.
+2. Log in to PA as user BER in web browser. You should see what is your static role in console i.e. `Role: ZSC_AWT_BERATER_DE`.
 3. Run `IE > File > New session` or delete cookies for localhost domain.
 4. Open ADMINBOX page in browser.
-5. Log in as SON.
+5. Log in as user SON.
 6. Click on `Rollen und Berechtigungen`.
 7. Click `NEUE ROLLE ANLEGEN`.
 8. Rollename: Berater static
@@ -28,7 +28,7 @@ Basically what should be done for local development:
 
 ## Testing
 
-1. Relogin to PA in web browser for privileges to take effect.
+1. Relogin to PA as user BER in web browser for privileges to take effect.
 2. Startseite > BAUSTEIN ERSTELLEN > Sicherung der Gesundheit > Beihilfe > ZUR PRODUKTAUSWAHL.
 3. You should correct all errors in the form:
   - `Grunddaten > Tätigkeitsstatus > Beamter (auf Probe / Lebenszeit)`
