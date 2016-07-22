@@ -91,6 +91,8 @@ You have to login with some BER or SON, i.e. BER07848.
 
 ### Live reload
 
+In src directory run:
+
 `MAIN=RTT gulp`
 
 Open http://localhost:8126/
