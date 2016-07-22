@@ -27,13 +27,13 @@ https://intellij-support.jetbrains.com/hc/en-us/articles/206544879-Selecting-the
 
 Then restart idea.
 
-##  node jboss-setup.js - Error: EBUSY: resource busy or locked, unlink
+## Error: EBUSY: resource busy or locked, unlink when running ./generate-configs.js
 
 Stop jboss and rerun this command
 
 ## org.jboss.msc.service.DuplicateServiceException: Service jboss.web.deployment.default-host./xbg-ab-pa-web.realm is already registered
 
-Run `$JBOSS_HOME/standalone\deployments/*.war*` or `node jboss-setup.sh`.
+Run `$JBOSS_HOME/standalone\deployments/*.war*` or `./generate-configs.js`.
 
 ## Server responds with 404
 

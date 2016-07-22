@@ -10,7 +10,7 @@ if [ ! -d "$DIR/../node_modules" ]; then
 fi
 
 ./rtt-npm-setup.js && \
-./jboss-setup.js && \
+./generate-configs.js && \
 ./mvn-install.js RTT && \
 ./rtt-oracle-setup.js
 
