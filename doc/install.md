@@ -113,7 +113,7 @@ In src directory run:
 
 `MAIN=RTT gulp`
 
-Open http://localhost:8126/
+Open in IE http://localhost:8126/ or in Chrome but start like this: `chrome.exe --disable-web-security`.
 
 #### Troubleshootinhg
 
