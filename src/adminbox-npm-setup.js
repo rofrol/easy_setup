@@ -15,7 +15,9 @@ npm_install('grunt');
 var path = require('path');
 
 chdir(process.env.ADMINBOX_HOME + '/xbg-ab-web', function() {
-  fs.removeSync('node_modules')
+  if(process.env.NPM_CLEAN === 'true') {
+    fs.removeSync('node_modules');
+  }
   exec('npm i node-sass@3.4.2');
   exec('npm i');
   exec('grunt');
