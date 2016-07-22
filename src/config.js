@@ -2,12 +2,16 @@ require('dotenv').config();
 var ORACLE_HOSTNAME = process.env.ORACLE_HOST + ':' + process.env.ORACLE_PORT + '/' + process.env.ORACLE_SID_NAME;
 var SQLPLUS_AS_SYSTEM = 'sqlplus -s system/' + process.env.ORACLE_SYSTEM_PASSWORD + '@' + ORACLE_HOSTNAME;
 
+console.log('process.env.MAIN:', process.env.MAIN);
+
 function main() {
     var MAIN = process.argv.slice(2)[0];
-
     if(typeof MAIN === 'undefined') {
-        console.log('Specify project as command line argument');
-        process.exit(1);
+        MAIN = process.env.MAIN;
+        if(typeof MAIN === 'undefined') {
+            console.log('Specify project as command line argument or MAIN env variable.');
+            process.exit(1);
+        }
     }
 
     return MAIN;

@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-controller="ABController">
+<head>
+	<meta charset="utf-8">
+	<title>MLP - RTT</title>
+	<base href="http://localhost:8126/">
+	<link rel="shortcut icon" type="image/x-icon" href="./framework/files/favicon.ico">
+	<link rel="stylesheet" href="./adminbox/css/layout.css">
+	<script data-main="adminbox/js/require-config.js" src="./vendor/js/require.js"></script>
+	<meta name="restUrl" content="http://localhost:8080/xbg-rtt-web/rest/" />
+</head>
+<body>
+	<header>
+		<div id="mlp-header" class="grid">
+			<div id="mlp-logo" class="column">
+				<img src="./framework/images/mlp_logo_oneline.png" alt="MLP" />
+			</div>
+		</div>
+		<nav class="main" data-navigation="horizontal">
+			<ul class="grid">
+				<li class="column">
+					<a>RTT</a>
+					<ul class="grid">
+						<li class="column"><a ng-click="go('/search')">Suche</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+	<content>
+		<messages></messages>
+		<ng-view> </ng-view>
+	</content>
+
+	<overlay></overlay>
+
+	<div id="loaderDiv" loader>
+		<img src="./framework/images/spin.gif" class="ajax-loader" />
+	</div>
+</body>
+</html>

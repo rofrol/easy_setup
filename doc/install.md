@@ -88,3 +88,9 @@ Later you run specific scripts listed in `rtt-all.sh`.
 When you see in console `JBoss ... started in`, open http://localhost:8080/xbg-rtt-web/. If you see `JBoss ... started (with errors) in`, that's not good.
 
 You have to login with some BER or SON, i.e. BER07848.
+
+### Live reload
+
+`MAIN=RTT gulp`
+
+Open http://localhost:8125/
