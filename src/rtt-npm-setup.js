@@ -10,7 +10,7 @@ if(process.env.OFFLINE === 'true') {
 require('shelljs/global');
 var fs = require('fs-extra');
 
-npm_install(grunt);
+npm_install('grunt');
 
 var path = require('path');
 
