@@ -37,7 +37,6 @@ if(process.env.RTT_ENABLED === 'true') {
 bindings.push('            </bindings>');
 
 
-var config = require('./config.js');
 var standalone = fs.readFileSync('jboss/standalone-' + process.env.JBOSS_VERSION + '.xml', 'utf8');
 
 standalone = standalone
@@ -50,70 +49,70 @@ standalone = standalone
 
 fs.outputFileSync(process.env.JBOSS_HOME + '/standalone/configuration/standalone.xml', standalone, 'utf8');
 
-var config
+var out
 
 //************************************************************************
 // PA config
 //************************************************************************
 
-config = fs.readFileSync(process.env.PA_CONFIG_BASE, 'utf8');
+out = fs.readFileSync(process.env.PA_CONFIG_BASE, 'utf8');
 
-config = updateValueFromEnv(config, 'rtt.enabled');
-config = updateValueFromEnv(config, 'contentDirectory.current');
-config = updateValueFromEnv(config, 'contentDirectory.upload');
-config = updateValueFromEnv(config, 'mappingRegelnDirectory.upload');
-config = updateValueFromEnv(config, 'adminboxUploadDirectory');
-config = updateValueFromEnv(config, 'bundler.documentPoolDirectoryPath');
+out = updateValueFromEnv(out, 'rtt.enabled');
+out = updateValueFromEnv(out, 'contentDirectory.current');
+out = updateValueFromEnv(out, 'contentDirectory.upload');
+out = updateValueFromEnv(out, 'mappingRegelnDirectory.upload');
+out = updateValueFromEnv(out, 'adminboxUploadDirectory');
+out = updateValueFromEnv(out, 'bundler.documentPoolDirectoryPath');
 
-fs.outputFileSync(process.env.PA_CONFIG, config, 'utf8');
+fs.outputFileSync(process.env.PA_CONFIG, out, 'utf8');
 
 //************************************************************************
 // RTT config
 //************************************************************************
 
-config = fs.readFileSync(process.env.RTT_CONFIG_BASE, 'utf8');
+out = fs.readFileSync(process.env.RTT_CONFIG_BASE, 'utf8');
 
-config = updateValueFromEnv(config, 'disable-auth-filter');
+out = updateValueFromEnv(out, 'disable-auth-filter');
 
 if(process.env.PA_ENABLED === 'true') {
-    config = replaceValue(config, 'paServer.url', valueFromEnv('host-name'));
+    out = replaceValue(out, 'paServer.url', valueFromEnv('host-name'));
 } else {
-    config = replaceValue(config, 'paServer.url', process.env['REMOTE_HOST_NAME']);
+    out = replaceValue(out, 'paServer.url', process.env['REMOTE_HOST_NAME']);
 }
 
-fs.outputFileSync(process.env.RTT_CONFIG, config, 'utf8');
+fs.outputFileSync(process.env.RTT_CONFIG, out, 'utf8');
 
 
 //************************************************************************
 // Adminbox PA config
 //************************************************************************
 
-config = fs.readFileSync(process.env.ADMINBOX_CONFIG_BASE, 'utf8');
+out = fs.readFileSync(process.env.ADMINBOX_CONFIG_BASE, 'utf8');
 
-config = updateValueFromEnv(config, 'disable-auth-filter');
-config = replaceValue(config, 'releaseDirectory', valueFromEnv('adminboxUploadDirectory'));
-config = replaceValue(config, 'transportDirectory', valueFromEnv('adminboxUploadDirectory') + '/export');
-config = updateValueFromEnv(config, 'host-name');
-config = replaceValue(config, 'storage.flyway.admin.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
-config = replaceValue(config, 'storage.flyway.admin.datasource.driver', 'oracle.jdbc.OracleDriver');
-config = updateValueFromEnv(config, 'storage.flyway.admin.datasource.username');
-config = updateValueFromEnv(config, 'storage.flyway.admin.datasource.password');
-config = replaceValue(config, 'storage.flyway.application.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
-config = replaceValue(config, 'storage.flyway.application.datasource.driver', 'oracle.jdbc.OracleDriver');
-config = updateValueFromEnv(config, 'storage.flyway.application.datasource.username');
-config = updateValueFromEnv(config, 'storage.flyway.application.datasource.password');
-config = updateValueFromEnv(config, 'feature.export.available');
-config = updateValueFromEnv(config, 'feature.transport.available');
-config = updateValueFromEnv(config, 'feature.import.available');
+out = updateValueFromEnv(out, 'disable-auth-filter');
+out = replaceValue(out, 'releaseDirectory', valueFromEnv('adminboxUploadDirectory'));
+out = replaceValue(out, 'transportDirectory', valueFromEnv('adminboxUploadDirectory') + '/export');
+out = updateValueFromEnv(out, 'host-name');
+out = replaceValue(out, 'storage.flyway.admin.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
+out = replaceValue(out, 'storage.flyway.admin.datasource.driver', 'oracle.jdbc.OracleDriver');
+out = updateValueFromEnv(out, 'storage.flyway.admin.datasource.username');
+out = updateValueFromEnv(out, 'storage.flyway.admin.datasource.password');
+out = replaceValue(out, 'storage.flyway.application.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
+out = replaceValue(out, 'storage.flyway.application.datasource.driver', 'oracle.jdbc.OracleDriver');
+out = updateValueFromEnv(out, 'storage.flyway.application.datasource.username');
+out = updateValueFromEnv(out, 'storage.flyway.application.datasource.password');
+out = updateValueFromEnv(out, 'feature.export.available');
+out = updateValueFromEnv(out, 'feature.transport.available');
+out = updateValueFromEnv(out, 'feature.import.available');
 
 if(process.env.PA_ENABLED === 'true') {
-    config = replaceValue(config, 'paServer.url', valueFromEnv('host-name'));
+    out = replaceValue(out, 'paServer.url', valueFromEnv('host-name'));
 } else {
-    config = replaceValue(config, 'paServer.url', process.env['REMOTE_HOST_NAME']);
+    out = replaceValue(out, 'paServer.url', process.env['REMOTE_HOST_NAME']);
 }
 
 
-fs.outputFileSync(process.env.ADMINBOX_CONFIG, config, 'utf8');
+fs.outputFileSync(process.env.ADMINBOX_CONFIG, out, 'utf8');
 
 
 //************************************************************************
