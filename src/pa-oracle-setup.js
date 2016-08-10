@@ -3,9 +3,14 @@ var config = require('./config.js');
 var chdir = require('./chdir');
 require('shelljs/global');
 
+var user = require('./user.js');
+
 // sql
 
 exec('echo exit', {silent:true}).exec(config.SQLPLUS_AS_SYSTEM + ' @oracle/create-tablespaces.sql');
+
+user.dropUserIfExists('PA');
+user.dropUserIfExists('PAWORK');
 exec('echo exit', {silent:true}).exec(config.SQLPLUS_AS_SYSTEM + ' @oracle/pa-users.sql');
 
 // flyway
