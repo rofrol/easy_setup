@@ -5,20 +5,20 @@
 -- http://stackoverflow.com/questions/885304/why-does-running-this-query-with-execute-immediate-cause-it-to-fail
 
 declare
-userexist integer;
+users integer;
 begin
-  select count(*) into userexist from dba_users where username='partt';
-  if (userexist = 0) then
+  select count(*) into users from dba_users where username='PARTT';
+  if (users != 0) then
     execute immediate 'DROP USER partt CASCADE';
   end if;
 end;
 /
 
 declare
-userexist integer;
+users integer;
 begin
-  select count(*) into userexist from dba_users where username='parttwork';
-  if (userexist = 0) then
+  select count(*) into users from dba_users where username='PARTTWORK';
+  if (users != 0) then
     execute immediate 'DROP USER parttwork CASCADE';
   end if;
 end;
