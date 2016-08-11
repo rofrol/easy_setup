@@ -89,7 +89,8 @@ fs.outputFileSync(process.env.RTT_CONFIG, out, 'utf8');
 
 out = fs.readFileSync(process.env.ADMINBOX_CONFIG_BASE, 'utf8');
 
-out = updateValueFromEnv(out, 'disable-auth-filter');
+// causes problems for adminbox
+// out = updateValueFromEnv(out, 'disable-auth-filter');
 out = replaceValue(out, 'releaseDirectory', valueFromEnv('adminboxUploadDirectory'));
 out = replaceValue(out, 'transportDirectory', valueFromEnv('adminboxUploadDirectory') + '/export');
 out = updateValueFromEnv(out, 'host-name');
