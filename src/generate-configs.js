@@ -11,6 +11,7 @@ var path = require('path');
 fs.mkdirsSync(process.env.BUNDLER_DOCUMENTPOOLDIRECTORYPATH);
 
 fs.copySync('modules', path.resolve(process.env.JBOSS_HOME, 'modules'), {clobber: true});
+fs.copySync('modules', path.resolve(process.env.JBOSS_HOME_RTT, 'modules'), {clobber: true});
 fs.removeSync(process.env.JBOSS_HOME + '/standalone/deployments/*.war*');
 
 //************************************************************************
@@ -47,7 +48,22 @@ standalone = standalone
     .replace(new RegExp('"/projects/xbg-adminbox/config/local"', 'g'), '"' + path.dirname(process.env.ADMINBOX_CONFIG) + '"')
     .replace(/localhost:1521:XE/, config.ORACLE_HOSTNAME);
 
+// standalone_pa
+
 fs.outputFileSync(process.env.JBOSS_HOME + '/standalone/configuration/standalone.xml', standalone, 'utf8');
+
+// standalone_rtt
+
+var standalone_rtt = standalone.replace(
+    new RegExp('<socket-binding name="http" port="8080"/>', 'g'),
+    '<socket-binding name="http" port="' + process.env.JBOSS_PORT_RTT + '"/>'
+);
+
+standalone_rtt = standalone_rtt.replace(new RegExp('jboss\.management\.native\.port:9999', 'g'), 'jboss.management.native.port:9989');
+standalone_rtt = standalone_rtt.replace(new RegExp('jboss\.management\.http\.port:9990', 'g'), 'jboss.management.http.port:9980');
+standalone_rtt = standalone_rtt.replace(new RegExp('<socket-binding name="remoting" port="4447"/>', 'g'), '<socket-binding name="remoting" port="4437"/>');
+
+fs.outputFileSync(process.env.JBOSS_HOME_RTT + '/standalone/configuration/standalone.xml', standalone_rtt, 'utf8');
 
 var out
 
@@ -63,6 +79,7 @@ out = updateValueFromEnv(out, 'contentDirectory.upload');
 out = updateValueFromEnv(out, 'mappingRegelnDirectory.upload');
 out = updateValueFromEnv(out, 'adminboxUploadDirectory');
 out = updateValueFromEnv(out, 'bundler.documentPoolDirectoryPath');
+out = replaceValue(out, 'rtt.rest.service.url', 'http://localhost:' + process.env.JBOSS_PORT_RTT + '/xbg-rtt-web/rest');
 
 fs.outputFileSync(process.env.PA_CONFIG, out, 'utf8');
 
@@ -79,6 +96,8 @@ if(process.env.PA_ENABLED === 'true') {
 } else {
     out = replaceValue(out, 'paServer.url', process.env['REMOTE_HOST_NAME']);
 }
+
+out = replaceValue(out, 'host-name', 'http://localhost:' + process.env.JBOSS_PORT_RTT);
 
 fs.outputFileSync(process.env.RTT_CONFIG, out, 'utf8');
 
