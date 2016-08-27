@@ -111,7 +111,7 @@ Read more about .env in chapter `## Prepare config`.
 
 In src directory run:
 
-`MAIN=RTT gulp`
+`gulp RTT`
 
 Open in IE http://localhost:8126/ or in Chrome but start like this: `chrome.exe --disable-web-security`.
 
