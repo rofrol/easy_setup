@@ -1,4 +1,3 @@
-
 # PA and RTT integration
 
 ## Config
