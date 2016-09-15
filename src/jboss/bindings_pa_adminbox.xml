@@ -1,3 +1,2 @@
-                <simple name="java:global/xbg-adminbox/configDirectory" value="/projects/xbg-adminbox/config/local" type="java.lang.String"/>
-                <simple name="java:global/xbg-pa-adminbox/configDirectory" value="/projects/xbg-adminbox/config/local" type="java.lang.String"/>
+                <simple name="java:global/xbg-pa-adminbox/configDirectory" value="/projects/xbg-pa-adminbox/config/local" type="java.lang.String"/>
                 <simple name="java:global/xbg-pa/configDirectory" value="/projects/xbg-pa/config/localConfigExample" type="java.lang.String"/>

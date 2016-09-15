@@ -9,7 +9,7 @@ if [ ! -d "$DIR/../node_modules" ]; then
   exit 1;
 fi
 
-./adminbox-npm-setup.js && \
+./npm-setup.js ADMINBOX && \
 ./generate-configs.js && \
 ./mvn-install.js ADMINBOX && \
 ./adminbox-oracle-setup.js

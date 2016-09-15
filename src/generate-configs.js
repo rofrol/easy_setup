@@ -45,7 +45,7 @@ standalone = standalone
     .replace(/                <datasource><\/datasource>/g, datasources.join('\n'))
     .replace(new RegExp('"/projects/xbg-pa/config/localConfigExample"', 'g'), '"' + path.dirname(process.env.PA_CONFIG) + '"')
     .replace(new RegExp('"/projects/xbg-rtt/config/local"', 'g'), '"' + path.dirname(process.env.PA_CONFIG) + '"')
-    .replace(new RegExp('"/projects/xbg-adminbox/config/local"', 'g'), '"' + path.dirname(process.env.ADMINBOX_CONFIG) + '"')
+    .replace(new RegExp('"/projects/xbg-pa-adminbox/config/local"', 'g'), '"' + path.dirname(process.env.ADMINBOX_CONFIG) + '"')
     .replace(/localhost:1521:XE/, config.ORACLE_HOSTNAME);
 
 // standalone_pa

@@ -1,2 +1,2 @@
                 <simple name="java:global/xbg-adapter/configFile" value="/projects/xbg-pa/config/localConfigExample/adapter.conf"/>
-                <simple name="java:global/xbg-adapter/qualificationConfigFile" value="/projects/xbg-adminbox/config/local/qualification-roles.conf"/>
+                <simple name="java:global/xbg-adapter/qualificationConfigFile" value="/projects/xbg-pa/config/localConfigExample/qualification-roles.conf"/>
