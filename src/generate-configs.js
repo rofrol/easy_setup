@@ -80,6 +80,7 @@ out = updateValueFromEnv(out, 'mappingRegelnDirectory.upload');
 out = updateValueFromEnv(out, 'adminboxUploadDirectory');
 out = updateValueFromEnv(out, 'bundler.documentPoolDirectoryPath');
 out = replaceValue(out, 'rtt.rest.service.url', 'http://localhost:' + process.env.JBOSS_PORT_RTT + '/xbg-rtt-web/rest');
+out = replaceValue(out, 'mappingRegelnDirectory.upload', '/mlp_temp/pa-bundlers-configuration');
 
 fs.outputFileSync(process.env.PA_CONFIG, out, 'utf8');
 
