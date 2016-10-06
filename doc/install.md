@@ -6,6 +6,8 @@
 - bash
 - `mvn` is in `$PATH`
 - env `MVN_HOME` and `JAVA_HOME` are set
+- for PA: `npm i -g gulp`
+- RTT and ADMINBOX: `npm i -g grunt`
 
 ## Oracle on Windows
 
