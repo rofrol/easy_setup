@@ -2,7 +2,7 @@
 
 `git clone` this repository.
 
-Read doc/install.md
+Read [doc/install.md](doc/install.md).
 
 ## If you can't clone it behind proxy
 
