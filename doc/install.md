@@ -8,6 +8,7 @@
 - env `MVN_HOME` and `JAVA_HOME` are set
 - for PA: `npm i -g gulp`
 - RTT and ADMINBOX: `npm i -g grunt`
+- sqplus in PATH - after installing Oracle Express restart your console to update PATH
 
 ## Oracle on Windows
 
