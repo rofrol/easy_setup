@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 var config = require('./config.js');
+config.main();
 var chdir = require('./chdir');
 require('shelljs/global');
 var fs = require('fs-extra');

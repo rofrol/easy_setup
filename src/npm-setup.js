@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-process.env.MAIN = 'ADMINBOX';
 var config = require('./config.js');
+config.main();
 var chdir = require('./chdir');
 var npm_install = require('./npm_install');
 var fs = require('fs-extra');
