@@ -13,8 +13,6 @@
 ### `Server` tab
 
 - `Application server > Choose your jboss installation`
-- `On 'Update' action > Update resources`
-- `On frame deactivation > Update resources`
 - Uncheck `Open browser: After launch`
 
 ### `Deployment` tab
@@ -25,6 +23,11 @@ Click `Edit artifact` icon
 
   - `Artifact > Ouput directory` remove `SNAPSHOT` from path, so it looks like `C:\projects\xbg-pa\pa-web\target\pa-web`
   - `Modules > pa-web > Sources`: unexclude `target/frontend` and mark it as `Resources`
+
+After choosing war, you can set addtional options in `Server` tab
+
+- `On 'Update' action > Update resources`
+- `On frame deactivation > Update resources`
 
 ### Gulp
 
