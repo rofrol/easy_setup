@@ -15,6 +15,7 @@
 - `Application server > Choose your jboss installation`
 - `On 'Update' action > Update resources`
 - `On frame deactivation > Update resources`
+- Uncheck `Open browser: After launch`
 
 ### `Deployment` tab
 
