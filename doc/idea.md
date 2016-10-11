@@ -2,6 +2,7 @@
 
 - `IDEA > File > Other Settings > Default Settings > Build, Execution, Deployment > Build Tools > Maven > Importing > Import Maven projects automatically`
 - `IDEA > File > Other Settings > Default Settings > Build, Execution, Deployment > Build Tools > Maven > Importing > Use Maven ouput directories > Uncheck`
+- `IDEA > File > Other Settings > Default Settings > Editor > File Encodings > set UTF-8 everywhere`
 - `IDEA > File > Other Settings > Default Project Structure > SDK > Java 1.8`
 - `IDEA > File > Other Settings > Default Project Structure > Language level > Java 1.7`
 
