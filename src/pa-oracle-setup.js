@@ -33,4 +33,6 @@ chdir(process.env.PA_HOME + '/pa-storage', function() {
 exec("echo INSERT INTO PA_ROLE_RIGHT_STATIC (PA_ROLE, PA_RIGHT, CREATED_DATE, VERSION, AGENT, INHERITABLE) VALUES ('ZSC_AWT_BERATER_DE', 'PA', sysdate, sysdate, 'Adminbox', 'N');", {silent:true})
 .exec('sqlplus -s pa/pa@' + config.ORACLE_HOSTNAME);
 
+// cp C:\projects\xbg-pa\config\databaseExports\*.zip to mlp upload
+
 // http://stackoverflow.com/questions/19803748/change-working-directory-in-my-current-shell-context-when-running-node-script
