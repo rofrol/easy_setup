@@ -2,6 +2,8 @@
 var config = require('./config.js');
 var chdir = require('./chdir');
 require('shelljs/global');
+var fs = require('fs-extra');
+var helper = require('./helper.js');
 
 var user = require('./user.js');
 
@@ -33,6 +35,20 @@ chdir(process.env.PA_HOME + '/pa-storage', function() {
 exec("echo INSERT INTO PA_ROLE_RIGHT_STATIC (PA_ROLE, PA_RIGHT, CREATED_DATE, VERSION, AGENT, INHERITABLE) VALUES ('ZSC_AWT_BERATER_DE', 'PA', sysdate, sysdate, 'Adminbox', 'N');", {silent:true})
 .exec('sqlplus -s pa/pa@' + config.ORACLE_HOSTNAME);
 
-// cp C:\projects\xbg-pa\config\databaseExports\*.zip to mlp upload
+try {
+  var srcDir = process.env.PA_HOME + '/config/databaseExports/';
+  var dstDir = helper.valueFromEnv('adminboxUploadDirectory');
+  fs.walk(srcDir)
+    .on('data', function (item) {
+      if(path.extname(item.path).toLowerCase() === '.zip') {
+        var basename = path.basename(item.path);
+        console.log('copying:', item.path);
+        fs.copySync(srcDir + '/' + basename, dstDir + '/' + basename);
+      }
+  });
+
+} catch (err) {
+  console.error(err)
+}
 
 // http://stackoverflow.com/questions/19803748/change-working-directory-in-my-current-shell-context-when-running-node-script

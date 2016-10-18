@@ -2,6 +2,7 @@
 var config = require('./config.js');
 var fs = require('fs-extra');
 var path = require('path');
+var helper = require('./helper.js');
 
 //************************************************************************
 // Some fs operations
@@ -73,14 +74,14 @@ var out
 
 out = fs.readFileSync(process.env.PA_CONFIG_BASE, 'utf8');
 
-out = updateValueFromEnv(out, 'rtt.enabled');
-out = updateValueFromEnv(out, 'contentDirectory.current');
-out = updateValueFromEnv(out, 'contentDirectory.upload');
-out = updateValueFromEnv(out, 'mappingRegelnDirectory.upload');
-out = updateValueFromEnv(out, 'adminboxUploadDirectory');
-out = updateValueFromEnv(out, 'bundler.documentPoolDirectoryPath');
-out = replaceValue(out, 'rtt.rest.service.url', 'http://localhost:' + process.env.JBOSS_PORT_RTT + '/xbg-rtt-web/rest');
-out = replaceValue(out, 'mappingRegelnDirectory.upload', '/mlp_temp/pa-bundlers-configuration');
+out = helper.updateValueFromEnv(out, 'rtt.enabled');
+out = helper.updateValueFromEnv(out, 'contentDirectory.current');
+out = helper.updateValueFromEnv(out, 'contentDirectory.upload');
+out = helper.updateValueFromEnv(out, 'mappingRegelnDirectory.upload');
+out = helper.updateValueFromEnv(out, 'adminboxUploadDirectory');
+out = helper.updateValueFromEnv(out, 'bundler.documentPoolDirectoryPath');
+out = helper.replaceValue(out, 'rtt.rest.service.url', 'http://localhost:' + process.env.JBOSS_PORT_RTT + '/xbg-rtt-web/rest');
+out = helper.replaceValue(out, 'mappingRegelnDirectory.upload', '/mlp_temp/pa-bundlers-configuration');
 
 fs.outputFileSync(process.env.PA_CONFIG, out, 'utf8');
 
@@ -90,15 +91,15 @@ fs.outputFileSync(process.env.PA_CONFIG, out, 'utf8');
 
 out = fs.readFileSync(process.env.RTT_CONFIG_BASE, 'utf8');
 
-out = updateValueFromEnv(out, 'disable-auth-filter');
+out = helper.updateValueFromEnv(out, 'disable-auth-filter');
 
 if(process.env.PA_ENABLED === 'true') {
-    out = replaceValue(out, 'paServer.url', valueFromEnv('host-name'));
+    out = helper.replaceValue(out, 'paServer.url', helper.valueFromEnv('host-name'));
 } else {
-    out = replaceValue(out, 'paServer.url', process.env['REMOTE_HOST_NAME']);
+    out = helper.replaceValue(out, 'paServer.url', process.env['REMOTE_HOST_NAME']);
 }
 
-out = replaceValue(out, 'host-name', 'http://localhost:' + process.env.JBOSS_PORT_RTT);
+out = helper.replaceValue(out, 'host-name', 'http://localhost:' + process.env.JBOSS_PORT_RTT);
 
 fs.outputFileSync(process.env.RTT_CONFIG, out, 'utf8');
 
@@ -110,63 +111,30 @@ fs.outputFileSync(process.env.RTT_CONFIG, out, 'utf8');
 out = fs.readFileSync(process.env.ADMINBOX_CONFIG_BASE, 'utf8');
 
 // causes problems for adminbox
-// out = updateValueFromEnv(out, 'disable-auth-filter');
-out = replaceValue(out, 'releaseDirectory', valueFromEnv('adminboxUploadDirectory'));
-out = replaceValue(out, 'transportDirectory', valueFromEnv('adminboxUploadDirectory') + '/export');
-out = updateValueFromEnv(out, 'host-name');
-out = replaceValue(out, 'storage.flyway.admin.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
-out = replaceValue(out, 'storage.flyway.admin.datasource.driver', 'oracle.jdbc.OracleDriver');
-out = updateValueFromEnv(out, 'storage.flyway.admin.datasource.username');
-out = updateValueFromEnv(out, 'storage.flyway.admin.datasource.password');
-out = replaceValue(out, 'storage.flyway.application.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
-out = replaceValue(out, 'storage.flyway.application.datasource.driver', 'oracle.jdbc.OracleDriver');
-out = updateValueFromEnv(out, 'storage.flyway.application.datasource.username');
-out = updateValueFromEnv(out, 'storage.flyway.application.datasource.password');
-out = updateValueFromEnv(out, 'feature.export.available');
-out = updateValueFromEnv(out, 'feature.transport.available');
-out = updateValueFromEnv(out, 'feature.import.available');
+// out = helper.updateValueFromEnv(out, 'disable-auth-filter');
+out = helper.replaceValue(out, 'releaseDirectory', helper.valueFromEnv('adminboxUploadDirectory'));
+out = helper.replaceValue(out, 'transportDirectory', helper.valueFromEnv('adminboxUploadDirectory') + '/export');
+out = helper.updateValueFromEnv(out, 'host-name');
+out = helper.replaceValue(out, 'storage.flyway.admin.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
+out = helper.replaceValue(out, 'storage.flyway.admin.datasource.driver', 'oracle.jdbc.OracleDriver');
+out = helper.updateValueFromEnv(out, 'storage.flyway.admin.datasource.username');
+out = helper.updateValueFromEnv(out, 'storage.flyway.admin.datasource.password');
+out = helper.replaceValue(out, 'storage.flyway.application.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
+out = helper.replaceValue(out, 'storage.flyway.application.datasource.driver', 'oracle.jdbc.OracleDriver');
+out = helper.updateValueFromEnv(out, 'storage.flyway.application.datasource.username');
+out = helper.updateValueFromEnv(out, 'storage.flyway.application.datasource.password');
+out = helper.updateValueFromEnv(out, 'feature.export.available');
+out = helper.updateValueFromEnv(out, 'feature.transport.available');
+out = helper.updateValueFromEnv(out, 'feature.import.available');
 
 if(process.env.PA_ENABLED === 'true') {
-    out = replaceValue(out, 'paServer.url', valueFromEnv('host-name'));
+    out = helper.replaceValue(out, 'paServer.url', helper.valueFromEnv('host-name'));
 } else {
-    out = replaceValue(out, 'paServer.url', process.env['REMOTE_HOST_NAME']);
+    out = helper.replaceValue(out, 'paServer.url', process.env['REMOTE_HOST_NAME']);
 }
 
 
 fs.outputFileSync(process.env.ADMINBOX_CONFIG, out, 'utf8');
-
-
-//************************************************************************
-// Helper functions
-//************************************************************************
-
-function updateValueFromEnv(string, key) {
-    return replaceValue(string, key, valueFromEnv(key));
-}
-
-function replaceValue(string, key, value) {
-    var regex = new RegExp('^\\s*#?\\s*' + key.replace(/\./g, '\\.') + '\\s*=.*', 'gm');
-    if(!regex.test(string)) {
-      console.log('Failed to replace regex: ' + regex + ' with value: ' + value);
-      process.exit(1);
-    }
-    return string.replace(regex, key + ' = ' + value);
-}
-
-function envifyKey(key) {
-    var envified = key.toUpperCase().replace(/[.-]/g, '_');
-    // console.log(envified);
-    return envified;
-}
-
-function valueFromEnv(key) {
-    var value = process.env[envifyKey(key)];
-    if(typeof value === 'undefined') {
-        console.log('Failed to get value for key: ' + key + ' from env');
-        process.exit(1);
-    }
-    return value;
-}
 
 // http://stackoverflow.com/questions/10058814/get-data-from-fs-readfile/14078644#14078644
 // http://stackoverflow.com/questions/14177087/replace-a-string-in-a-file-with-nodejs
