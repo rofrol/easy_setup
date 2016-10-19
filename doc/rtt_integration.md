@@ -8,6 +8,10 @@ Basically what should be done for local development:
 - adminbox upload directory is the same in PA and ADMINBOX directory
 - JBoss is started with PA and RTT wars.
 
+## Adding rights
+
+Note: Not needed anymore if you uploaded `process.env.PA_HOME + '/config/databaseExports/'`
+
 1. Start jboss with PA, ADMINBOX and RTT wars.
 2. Log in to PA as user BER in web browser. You should see what is your static role in console i.e. `Role: ZSC_AWT_BERATER_DE`.
 3. Run `IE > File > New session` or delete cookies for localhost domain.
