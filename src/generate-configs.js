@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 var config = require('./config.js');
+config.main();
 var fs = require('fs-extra');
 var path = require('path');
 var helper = require('./helper.js');
@@ -10,10 +11,6 @@ var helper = require('./helper.js');
 
 // Why it needs pa?
 fs.mkdirsSync(process.env.BUNDLER_DOCUMENTPOOLDIRECTORYPATH);
-
-fs.copySync('modules', path.resolve(process.env.JBOSS_HOME, 'modules'), {clobber: true});
-fs.copySync('modules', path.resolve(process.env.JBOSS_HOME_RTT, 'modules'), {clobber: true});
-fs.removeSync(process.env.JBOSS_HOME + '/standalone/deployments/*.war*');
 
 //************************************************************************
 // standalone.xml
@@ -38,6 +35,7 @@ if(process.env.RTT_ENABLED === 'true') {
 
 bindings.push('            </bindings>');
 
+// standalone_pa
 
 var standalone = fs.readFileSync('jboss/standalone-' + process.env.JBOSS_VERSION + '.xml', 'utf8');
 
@@ -49,9 +47,6 @@ standalone = standalone
     .replace(new RegExp('"/projects/xbg-pa-adminbox/config/local"', 'g'), '"' + path.dirname(process.env.ADMINBOX_CONFIG) + '"')
     .replace(/localhost:1521:XE/, config.ORACLE_HOSTNAME);
 
-// standalone_pa
-
-fs.outputFileSync(process.env.JBOSS_HOME + '/standalone/configuration/standalone.xml', standalone, 'utf8');
 
 // standalone_rtt
 
@@ -64,7 +59,20 @@ standalone_rtt = standalone_rtt.replace(new RegExp('jboss\.management\.native\.p
 standalone_rtt = standalone_rtt.replace(new RegExp('jboss\.management\.http\.port:9990', 'g'), 'jboss.management.http.port:9980');
 standalone_rtt = standalone_rtt.replace(new RegExp('<socket-binding name="remoting" port="4447"/>', 'g'), '<socket-binding name="remoting" port="4437"/>');
 
-fs.outputFileSync(process.env.JBOSS_HOME_RTT + '/standalone/configuration/standalone.xml', standalone_rtt, 'utf8');
+// standalone_adminbox
+
+var standalone_adminbox = standalone.replace(
+    new RegExp('<socket-binding name="http" port="8080"/>', 'g'),
+    '<socket-binding name="http" port="' + process.env.JBOSS_PORT_ADMINBOX + '"/>'
+);
+
+standalone_adminbox = standalone_adminbox.replace(new RegExp('jboss\.management\.native\.port:9999', 'g'), 'jboss.management.native.port:9988');
+standalone_adminbox = standalone_adminbox.replace(new RegExp('jboss\.management\.http\.port:9990', 'g'), 'jboss.management.http.port:9979');
+standalone_adminbox = standalone_adminbox.replace(new RegExp('<socket-binding name="remoting" port="4447"/>', 'g'), '<socket-binding name="remoting" port="4436"/>');
+
+//************************************************************************
+// application configs
+//************************************************************************
 
 var out
 
@@ -101,7 +109,6 @@ if(process.env.PA_ENABLED === 'true') {
 
 out = helper.replaceValue(out, 'host-name', 'http://localhost:' + process.env.JBOSS_PORT_RTT);
 
-fs.outputFileSync(process.env.RTT_CONFIG, out, 'utf8');
 
 
 //************************************************************************
@@ -114,7 +121,7 @@ out = fs.readFileSync(process.env.ADMINBOX_CONFIG_BASE, 'utf8');
 // out = helper.updateValueFromEnv(out, 'disable-auth-filter');
 out = helper.replaceValue(out, 'releaseDirectory', helper.valueFromEnv('adminboxUploadDirectory'));
 out = helper.replaceValue(out, 'transportDirectory', helper.valueFromEnv('adminboxUploadDirectory') + '/export');
-out = helper.updateValueFromEnv(out, 'host-name');
+out = helper.replaceValue(out, 'host-name', helper.valueFromEnv('ADMINBOX_HOST_NAME'));
 out = helper.replaceValue(out, 'storage.flyway.admin.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
 out = helper.replaceValue(out, 'storage.flyway.admin.datasource.driver', 'oracle.jdbc.OracleDriver');
 out = helper.updateValueFromEnv(out, 'storage.flyway.admin.datasource.username');
@@ -133,8 +140,29 @@ if(process.env.PA_ENABLED === 'true') {
     out = helper.replaceValue(out, 'paServer.url', process.env['REMOTE_HOST_NAME']);
 }
 
+//************************************************************************
+// Write files
+//************************************************************************
 
-fs.outputFileSync(process.env.ADMINBOX_CONFIG, out, 'utf8');
+
+if(process.env.MAIN == 'PA') {
+  fs.copySync('modules', path.resolve(process.env.JBOSS_HOME, 'modules'), {clobber: true});
+  fs.removeSync(process.env.JBOSS_HOME + '/standalone/deployments/*.war*');
+  fs.outputFileSync(process.env.JBOSS_HOME + '/standalone/configuration/standalone.xml', standalone, 'utf8');
+} else if(process.env.MAIN == 'ADMINBOX') {
+  fs.copySync('modules', path.resolve(process.env.JBOSS_HOME_ADMINBOX, 'modules'), {clobber: true});
+  fs.removeSync(process.env.JBOSS_HOME_ADMINBOX + '/standalone/deployments/*.war*');
+  fs.outputFileSync(process.env.JBOSS_HOME_ADMINBOX + '/standalone/configuration/standalone.xml', standalone_adminbox, 'utf8');
+  fs.outputFileSync(process.env.ADMINBOX_CONFIG, out, 'utf8');
+} else  if(process.env.MAIN == 'RTT') {
+  fs.copySync('modules', path.resolve(process.env.JBOSS_HOME_RTT, 'modules'), {clobber: true});
+  fs.removeSync(process.env.JBOSS_HOME_RTT + '/standalone/deployments/*.war*');
+  fs.outputFileSync(process.env.JBOSS_HOME_RTT + '/standalone/configuration/standalone.xml', standalone_rtt, 'utf8');
+  fs.outputFileSync(process.env.RTT_CONFIG, out, 'utf8');
+} else {
+  console.err('You should provide main application parameter like PA, ADMINBOX, RTT');
+  process.exit(1);
+}
 
 // http://stackoverflow.com/questions/10058814/get-data-from-fs-readfile/14078644#14078644
 // http://stackoverflow.com/questions/14177087/replace-a-string-in-a-file-with-nodejs

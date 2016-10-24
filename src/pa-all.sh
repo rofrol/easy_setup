@@ -10,6 +10,6 @@ if [ ! -d "$DIR/../node_modules" ]; then
 fi
 
 ./npm-setup.js PA && \
-./generate-configs.js && \
+./generate-configs.js PA && \
 ./mvn-install.js PA && \
 ./pa-oracle-setup.js
