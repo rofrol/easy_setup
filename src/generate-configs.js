@@ -74,40 +74,37 @@ standalone_adminbox = standalone_adminbox.replace(new RegExp('<socket-binding na
 // application configs
 //************************************************************************
 
-var out
-
 //************************************************************************
 // PA config
 //************************************************************************
 
-out = fs.readFileSync(process.env.PA_CONFIG_BASE, 'utf8');
+var pa_out = fs.readFileSync(process.env.PA_CONFIG_BASE, 'utf8');
 
-out = helper.updateValueFromEnv(out, 'rtt.enabled');
-out = helper.updateValueFromEnv(out, 'contentDirectory.current');
-out = helper.updateValueFromEnv(out, 'contentDirectory.upload');
-out = helper.updateValueFromEnv(out, 'mappingRegelnDirectory.upload');
-out = helper.updateValueFromEnv(out, 'adminboxUploadDirectory');
-out = helper.updateValueFromEnv(out, 'bundler.documentPoolDirectoryPath');
-out = helper.replaceValue(out, 'rtt.rest.service.url', 'http://localhost:' + process.env.JBOSS_PORT_RTT + '/xbg-rtt-web/rest');
-out = helper.replaceValue(out, 'mappingRegelnDirectory.upload', '/mlp_temp/pa-bundlers-configuration');
+pa_out = helper.updateValueFromEnv(pa_out, 'rtt.enabled');
+pa_out = helper.updateValueFromEnv(pa_out, 'contentDirectory.current');
+pa_out = helper.updateValueFromEnv(pa_out, 'contentDirectory.upload');
+pa_out = helper.updateValueFromEnv(pa_out, 'mappingRegelnDirectory.upload');
+pa_out = helper.updateValueFromEnv(pa_out, 'adminboxUploadDirectory');
+pa_out = helper.updateValueFromEnv(pa_out, 'bundler.documentPoolDirectoryPath');
+pa_out = helper.replaceValue(pa_out, 'rtt.rest.service.url', 'http://localhost:' + process.env.JBOSS_PORT_RTT + '/xbg-rtt-web/rest');
+pa_out = helper.replaceValue(pa_out, 'mappingRegelnDirectory.upload', '/mlp_temp/pa-bundlers-configuration');
 
-fs.outputFileSync(process.env.PA_CONFIG, out, 'utf8');
 
 //************************************************************************
 // RTT config
 //************************************************************************
 
-out = fs.readFileSync(process.env.RTT_CONFIG_BASE, 'utf8');
+var rtt_out = fs.readFileSync(process.env.RTT_CONFIG_BASE, 'utf8');
 
-out = helper.updateValueFromEnv(out, 'disable-auth-filter');
+rtt_out = helper.updateValueFromEnv(rtt_out, 'disable-auth-filter');
 
 if(process.env.PA_ENABLED === 'true') {
-    out = helper.replaceValue(out, 'paServer.url', helper.valueFromEnv('host-name'));
+    rtt_out = helper.replaceValue(rtt_out, 'paServer.url', helper.valueFromEnv('host-name'));
 } else {
-    out = helper.replaceValue(out, 'paServer.url', process.env['REMOTE_HOST_NAME']);
+    rtt_out = helper.replaceValue(rtt_out, 'paServer.url', process.env['REMOTE_HOST_NAME']);
 }
 
-out = helper.replaceValue(out, 'host-name', 'http://localhost:' + process.env.JBOSS_PORT_RTT);
+rtt_out = helper.replaceValue(rtt_out, 'host-name', 'http://localhost:' + process.env.JBOSS_PORT_RTT);
 
 
 
@@ -115,29 +112,29 @@ out = helper.replaceValue(out, 'host-name', 'http://localhost:' + process.env.JB
 // Adminbox PA config
 //************************************************************************
 
-out = fs.readFileSync(process.env.ADMINBOX_CONFIG_BASE, 'utf8');
+var ab_out = fs.readFileSync(process.env.ADMINBOX_CONFIG_BASE, 'utf8');
 
 // causes problems for adminbox
-// out = helper.updateValueFromEnv(out, 'disable-auth-filter');
-out = helper.replaceValue(out, 'releaseDirectory', helper.valueFromEnv('adminboxUploadDirectory'));
-out = helper.replaceValue(out, 'transportDirectory', helper.valueFromEnv('adminboxUploadDirectory') + '/export');
-out = helper.replaceValue(out, 'host-name', helper.valueFromEnv('ADMINBOX_HOST_NAME'));
-out = helper.replaceValue(out, 'storage.flyway.admin.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
-out = helper.replaceValue(out, 'storage.flyway.admin.datasource.driver', 'oracle.jdbc.OracleDriver');
-out = helper.updateValueFromEnv(out, 'storage.flyway.admin.datasource.username');
-out = helper.updateValueFromEnv(out, 'storage.flyway.admin.datasource.password');
-out = helper.replaceValue(out, 'storage.flyway.application.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
-out = helper.replaceValue(out, 'storage.flyway.application.datasource.driver', 'oracle.jdbc.OracleDriver');
-out = helper.updateValueFromEnv(out, 'storage.flyway.application.datasource.username');
-out = helper.updateValueFromEnv(out, 'storage.flyway.application.datasource.password');
-out = helper.updateValueFromEnv(out, 'feature.export.available');
-out = helper.updateValueFromEnv(out, 'feature.transport.available');
-out = helper.updateValueFromEnv(out, 'feature.import.available');
+// ab_out = helper.updateValueFromEnv(ab_out, 'disable-auth-filter');
+ab_out = helper.replaceValue(ab_out, 'releaseDirectory', helper.valueFromEnv('adminboxUploadDirectory'));
+ab_out = helper.replaceValue(ab_out, 'transportDirectory', helper.valueFromEnv('adminboxUploadDirectory') + '/export');
+ab_out = helper.replaceValue(ab_out, 'host-name', helper.valueFromEnv('ADMINBOX_HOST_NAME'));
+ab_out = helper.replaceValue(ab_out, 'storage.flyway.admin.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
+ab_out = helper.replaceValue(ab_out, 'storage.flyway.admin.datasource.driver', 'oracle.jdbc.OracleDriver');
+ab_out = helper.updateValueFromEnv(ab_out, 'storage.flyway.admin.datasource.username');
+ab_out = helper.updateValueFromEnv(ab_out, 'storage.flyway.admin.datasource.password');
+ab_out = helper.replaceValue(ab_out, 'storage.flyway.application.datasource.url', 'jdbc:oracle:thin:@' + config.ORACLE_HOSTNAME);
+ab_out = helper.replaceValue(ab_out, 'storage.flyway.application.datasource.driver', 'oracle.jdbc.OracleDriver');
+ab_out = helper.updateValueFromEnv(ab_out, 'storage.flyway.application.datasource.username');
+ab_out = helper.updateValueFromEnv(ab_out, 'storage.flyway.application.datasource.password');
+ab_out = helper.updateValueFromEnv(ab_out, 'feature.export.available');
+ab_out = helper.updateValueFromEnv(ab_out, 'feature.transport.available');
+ab_out = helper.updateValueFromEnv(ab_out, 'feature.import.available');
 
 if(process.env.PA_ENABLED === 'true') {
-    out = helper.replaceValue(out, 'paServer.url', helper.valueFromEnv('host-name'));
+    ab_out = helper.replaceValue(ab_out, 'paServer.url', helper.valueFromEnv('host-name'));
 } else {
-    out = helper.replaceValue(out, 'paServer.url', process.env['REMOTE_HOST_NAME']);
+    ab_out = helper.replaceValue(ab_out, 'paServer.url', process.env['REMOTE_HOST_NAME']);
 }
 
 //************************************************************************
@@ -149,16 +146,17 @@ if(process.env.MAIN == 'PA') {
   fs.copySync('modules', path.resolve(process.env.JBOSS_HOME, 'modules'), {clobber: true});
   fs.removeSync(process.env.JBOSS_HOME + '/standalone/deployments/*.war*');
   fs.outputFileSync(process.env.JBOSS_HOME + '/standalone/configuration/standalone.xml', standalone, 'utf8');
+  fs.outputFileSync(process.env.PA_CONFIG, pa_out, 'utf8');
 } else if(process.env.MAIN == 'ADMINBOX') {
   fs.copySync('modules', path.resolve(process.env.JBOSS_HOME_ADMINBOX, 'modules'), {clobber: true});
   fs.removeSync(process.env.JBOSS_HOME_ADMINBOX + '/standalone/deployments/*.war*');
   fs.outputFileSync(process.env.JBOSS_HOME_ADMINBOX + '/standalone/configuration/standalone.xml', standalone_adminbox, 'utf8');
-  fs.outputFileSync(process.env.ADMINBOX_CONFIG, out, 'utf8');
+  fs.outputFileSync(process.env.ADMINBOX_CONFIG, ab_out, 'utf8');
 } else  if(process.env.MAIN == 'RTT') {
   fs.copySync('modules', path.resolve(process.env.JBOSS_HOME_RTT, 'modules'), {clobber: true});
   fs.removeSync(process.env.JBOSS_HOME_RTT + '/standalone/deployments/*.war*');
   fs.outputFileSync(process.env.JBOSS_HOME_RTT + '/standalone/configuration/standalone.xml', standalone_rtt, 'utf8');
-  fs.outputFileSync(process.env.RTT_CONFIG, out, 'utf8');
+  fs.outputFileSync(process.env.RTT_CONFIG, rtt_out, 'utf8');
 } else {
   console.err('You should provide main application parameter like PA, ADMINBOX, RTT');
   process.exit(1);
